@@ -58,18 +58,8 @@ export default function HubPage() {
             Ferramentas que entram em produção em horas, não meses. Sem contratar, sem configurar do zero. Se não entregar resultado, você cancela — sem multa.
           </p>
           <Button size="lg" asChild>
-            <a href="#solucoes">Ver o que está pronto</a>
+            <a href="#solucoes">Ver as ferramentas</a>
           </Button>
-        </div>
-      </section>
-
-      {/* Qualificação */}
-      <section className="py-8 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-dalton-gray-light text-lg leading-relaxed">
-            O <strong className="text-white">Radar</strong> já está em produção — você assina hoje e tem acesso em horas.
-            As próximas ferramentas chegam com vagas limitadas para os primeiros clientes.
-          </p>
         </div>
       </section>
 
