@@ -6,41 +6,39 @@ import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 
 export const metadata: Metadata = {
-  title: 'Dalton Lab — Você toca tudo na sua empresa. A gente resolve o que toma mais tempo.',
-  description: 'Ferramentas de IA prontas para usar para PME. Sem contratar ninguém, sem montar do zero.',
+  title: 'Dalton Lab — Ferramentas de IA para PME',
+  description: 'Ferramentas prontas para usar que resolvem o que toma mais tempo na sua empresa. Sem contratar, sem configurar do zero.',
 }
 
-const products = [
-  {
-    href: '/radar',
-    name: 'Radar',
-    tagline: 'Veja exatamente o que funciona no seu Instagram — e pare de postar no escuro.',
-    price: 'R$ 297/mês',
-    status: 'pronto' as const,
-    cta: 'Assinar agora',
-  },
+const featuredProduct = {
+  href: '/radar',
+  name: 'Radar',
+  tagline: 'Veja exatamente o que funciona no seu Instagram — e pare de postar no escuro.',
+  metric: '3M+ visualizações rastreadas',
+  price: 'R$ 297/mês',
+  cta: 'Assinar agora',
+}
+
+const comingSoonProducts = [
   {
     href: '/sdr',
     name: 'SDR WhatsApp',
     tagline: 'Seu WhatsApp atende, classifica e responde seus leads — mesmo quando você não está.',
-    price: 'Em breve · R$ 297/mês',
-    status: 'breve' as const,
+    price: 'R$ 297/mês no lançamento',
     cta: 'Garantir meu lugar',
   },
   {
     href: '/propostas',
     name: 'Gerador de Propostas',
     tagline: 'Do CRM para a proposta pronta em menos de 1 minuto — sem abrir o PowerPoint.',
-    price: 'Em breve · R$ 297/mês',
-    status: 'breve' as const,
+    price: 'R$ 297/mês no lançamento',
     cta: 'Garantir meu lugar',
   },
   {
     href: '/crm',
     name: 'Transcrição + CRM',
     tagline: 'Cada reunião vira resumo e tarefa no CRM automaticamente — sem você digitar nada.',
-    price: 'Em breve · R$ 297/mês',
-    status: 'breve' as const,
+    price: 'R$ 297/mês no lançamento',
     cta: 'Garantir meu lugar',
   },
 ]
@@ -52,16 +50,15 @@ export default function HubPage() {
       <section className="relative min-h-[80vh] flex flex-col items-center justify-center text-center px-6 py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-glow pointer-events-none" aria-hidden="true" />
         <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-6">
-          <Badge>Operação Ignição</Badge>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] tracking-tight">
-            Você toca tudo na sua empresa.{' '}
-            <span className="gradient-text">A gente resolve o que toma mais tempo.</span>
+            Você toca tudo na empresa.{' '}
+            <span className="gradient-text">Deixa o trabalho pesado com a gente.</span>
           </h1>
           <p className="text-lg md:text-xl text-dalton-gray-light max-w-2xl leading-relaxed">
-            A Dalton Lab cria ferramentas prontas para usar — sem precisar contratar ninguém, sem montar do zero. Escolha o que faz sentido para o seu negócio agora.
+            Ferramentas que entram em produção em horas, não meses. Sem contratar, sem configurar do zero. Se não entregar resultado, você cancela — sem multa.
           </p>
           <Button size="lg" asChild>
-            <a href="#solucoes">Ver soluções</a>
+            <a href="#solucoes">Ver o que está pronto</a>
           </Button>
         </div>
       </section>
@@ -70,38 +67,54 @@ export default function HubPage() {
       <section className="py-8 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-dalton-gray-light text-lg leading-relaxed">
-            Cada produto resolve um problema específico. Alguns já estão prontos — você pode assinar hoje. Outros chegam em breve, e você pode reservar o seu lugar antes do lançamento.
+            O <strong className="text-white">Radar</strong> já está em produção — você assina hoje e tem acesso em horas.
+            As próximas ferramentas chegam com vagas limitadas para os primeiros clientes.
           </p>
         </div>
       </section>
 
       {/* Produtos */}
       <section id="solucoes" className="py-16 px-6" aria-labelledby="produtos-title">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto flex flex-col gap-6">
           <h2 id="produtos-title" className="sr-only">Soluções Dalton Lab</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {products.map(p => (
-              <article key={p.href} className="glass-card p-8 flex flex-col gap-4 border-t-2 border-dalton-cyan/20 hover:border-dalton-cyan/50 transition-colors duration-200">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-black text-white">{p.name}</h3>
-                  {p.status === 'pronto' ? (
-                    <span className="text-xs font-bold uppercase tracking-widest text-green-400 bg-green-400/10 border border-green-400/20 px-3 py-1 rounded-full">
-                      Disponível
-                    </span>
-                  ) : (
-                    <span className="text-xs font-bold uppercase tracking-widest text-dalton-cyan bg-dalton-cyan/10 border border-dalton-cyan/20 px-3 py-1 rounded-full">
-                      Em breve
-                    </span>
-                  )}
+
+          {/* Radar — produto disponível */}
+          <article className="glass-card p-8 flex flex-col md:flex-row md:items-center gap-6 border-t-2 border-dalton-cyan/40 hover:border-dalton-cyan/70 transition-colors duration-200">
+            <div className="flex-1 flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <h3 className="text-2xl font-black text-white">{featuredProduct.name}</h3>
+                <span className="text-xs font-bold uppercase tracking-widest text-green-400 bg-green-400/10 border border-green-400/20 px-3 py-1 rounded-full">
+                  Disponível agora
+                </span>
+              </div>
+              <p className="text-dalton-gray-light leading-relaxed text-lg">{featuredProduct.tagline}</p>
+              <p className="text-dalton-gray-mid text-sm">{featuredProduct.metric} · {featuredProduct.price}</p>
+            </div>
+            <div className="flex-shrink-0">
+              <Link href={featuredProduct.href}>
+                <Button size="lg">{featuredProduct.cta} <ArrowRight size={16} className="ml-1" aria-hidden="true" /></Button>
+              </Link>
+            </div>
+          </article>
+
+          {/* Em breve — acesso antecipado */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {comingSoonProducts.map(p => (
+              <article key={p.href} className="glass-card p-6 flex flex-col gap-3 border-t-2 border-dalton-cyan/10 hover:border-dalton-cyan/30 transition-colors duration-200">
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="text-base font-black text-white">{p.name}</h3>
+                  <span className="text-xs font-bold uppercase tracking-widest text-dalton-cyan bg-dalton-cyan/10 border border-dalton-cyan/20 px-2.5 py-1 rounded-full whitespace-nowrap">
+                    Acesso antecipado
+                  </span>
                 </div>
-                <p className="text-dalton-gray-light leading-relaxed flex-1">{p.tagline}</p>
-                <div className="flex items-center justify-between mt-2">
-                  <p className="text-dalton-gray-mid text-sm">{p.price}</p>
+                <p className="text-dalton-gray-light text-sm leading-relaxed flex-1">{p.tagline}</p>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-dalton-gray-mid text-xs">{p.price}</p>
                   <Link
                     href={p.href}
-                    className="inline-flex items-center gap-2 text-dalton-cyan text-sm font-semibold hover:gap-3 transition-all duration-150 focus-visible:outline-none focus-visible:underline"
+                    className="inline-flex items-center gap-1.5 text-dalton-cyan text-sm font-semibold hover:gap-2.5 transition-all duration-150 focus-visible:outline-none focus-visible:underline"
                   >
-                    {p.cta} <ArrowRight size={16} aria-hidden="true" />
+                    {p.cta} <ArrowRight size={14} aria-hidden="true" />
                   </Link>
                 </div>
               </article>
@@ -110,13 +123,13 @@ export default function HubPage() {
         </div>
       </section>
 
-      {/* Prova social âncora */}
+      {/* Prova social */}
       <section className="py-12 px-6">
         <div className="max-w-3xl mx-auto">
           <div className="divider-glow mb-12" />
           <div className="text-center">
             <p className="text-dalton-gray-light text-lg leading-relaxed">
-              Mais de <span className="text-white font-bold">3 milhões de visualizações</span> já rastreadas pelo Radar, nosso primeiro produto. Cada ferramenta que lançamos resolve um problema específico — com dado, não com promessa.
+              Mais de <span className="text-white font-bold">3 milhões de visualizações</span> já rastreadas pelo Radar. Cada ferramenta que lançamos resolve um problema específico — com dado, não com promessa.
             </p>
           </div>
         </div>
@@ -126,8 +139,8 @@ export default function HubPage() {
       <section className="py-16 px-6 bg-white/[0.01]">
         <div className="max-w-3xl mx-auto text-center flex flex-col items-center gap-6">
           <p className="text-dalton-gray-light text-lg leading-relaxed">
-            A Dalton Lab é uma empresa de tecnologia brasileira. Cada ferramenta é desenvolvida com foco em resultado, não em funcionalidade.{' '}
-            <span className="text-white font-medium">Se não entregar, você cancela na hora.</span>
+            Cada ferramenta foi construída para resolver um problema específico — com dado real, não com lista de funcionalidades.{' '}
+            <span className="text-white font-medium">Se não funcionar no seu negócio, você cancela. Sem multa, sem fidelidade.</span>
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             {['Sem contrato anual', 'Setup em horas', 'Suporte direto com o time'].map(item => (
@@ -139,7 +152,7 @@ export default function HubPage() {
           </div>
           <Link href="/radar">
             <Button variant="secondary" size="md">
-              Conheça o Radar, nosso primeiro produto →
+              Começar com o Radar →
             </Button>
           </Link>
         </div>
