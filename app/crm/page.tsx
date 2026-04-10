@@ -4,14 +4,13 @@ import { useState } from 'react'
 import { HeroLP } from '@/components/sections/HeroLP'
 import { PainSection } from '@/components/sections/PainSection'
 import { SolutionSection } from '@/components/sections/SolutionSection'
-import { SocialProofPlaceholder } from '@/components/sections/SocialProofPlaceholder'
 import { PricingWaitlist } from '@/components/sections/PricingWaitlist'
 import { FAQSection } from '@/components/sections/FAQSection'
 import { WaitlistModal } from '@/components/WaitlistModal'
 import { Button } from '@/components/ui/Button'
 
 const PRODUCT = 'crm'
-const PRODUCT_LABEL = 'Transcrição + CRM'
+const PRODUCT_LABEL = 'Transcrição de Reuniões'
 
 const faqItems = [
   {
@@ -49,9 +48,10 @@ export default function TranscricaoCRMPage() {
   return (
     <div style={{ '--lp-accent': '#14B8A6' } as React.CSSProperties}>
       <HeroLP
-        badge="Transcrição + CRM"
+        badge="CRM sempre desatualizado?"
         headline="Cada reunião vira tarefa no CRM — sem você digitar nada."
-        subheadline="O que foi decidido na call fica registrado automaticamente: resumo, próximos passos e atualização no CRM. Sem depender de memória, caderno ou assistente."
+        subheadline="O que ficou decidido na call entra no CRM automaticamente — resumo, próximos passos e tarefas. Sem depender de memória."
+        ctaLabel="Conectar meu CRM →"
         onCTA={() => setModalOpen(true)}
       />
 
@@ -62,7 +62,7 @@ export default function TranscricaoCRMPage() {
           'Não é falta de atenção. É um processo que depende de memória humana para funcionar — e memória humana falha. Enquanto isso, o CRM fica desatualizado. O pipeline não reflete a realidade. As decisões da semana são baseadas em dado de duas semanas atrás.',
         ]}
         stats={[
-          { value: '100%', label: 'das notas de reunião criadas manualmente, sem integração ao CRM (pesquisa Dalton Lab)' },
+          { value: '100%', label: 'das reuniões sem transcrição dependem de memória para virar tarefa no CRM' },
           { value: '1', label: 'pessoa responsável por registrar = risco operacional real' },
           { value: '0', label: 'forecast confiável sem CRM atualizado' },
         ]}
@@ -90,7 +90,25 @@ export default function TranscricaoCRMPage() {
         closing="Nenhum dado some. Nenhum follow-up fica esquecido. O CRM finalmente reflete o que está acontecendo."
       />
 
-      <SocialProofPlaceholder />
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="divider-glow mb-16" />
+          <div className="glass-card p-10 text-center border border-dalton-cyan/10">
+            <p className="text-dalton-gray-mid text-sm uppercase tracking-widest mb-4">Como usamos internamente</p>
+            <blockquote className="text-2xl font-black text-white leading-snug mb-6">
+              &quot;O preenchimento manual de CRM simplesmente acabou.&quot;
+            </blockquote>
+            <p className="text-dalton-gray-light text-base max-w-xl mx-auto mb-4">
+              Na Dalton Lab, toda reunião comercial é transcrita automaticamente e enriquece o CRM sem nenhuma digitação.
+              Nenhuma informação perdida. Nenhum campo desatualizado.
+            </p>
+            <p className="text-dalton-gray-light text-sm">
+              Construímos esse produto porque tínhamos exatamente esse problema.
+            </p>
+            <p className="text-dalton-gray-mid text-sm mt-4">— Equipe Dalton Lab</p>
+          </div>
+        </div>
+      </section>
 
       <PricingWaitlist rows={pricingRows} onCTA={() => setModalOpen(true)} />
 

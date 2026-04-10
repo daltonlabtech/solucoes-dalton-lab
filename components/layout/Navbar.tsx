@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/Button'
 const links = [
   { href: '/sdr', label: 'SDR WhatsApp' },
   { href: '/propostas', label: 'Gerador de Propostas' },
-  { href: '/crm', label: 'Transcrição + CRM' },
+  { href: '/crm', label: 'Reuniões → CRM' },
   { href: '/radar', label: 'Radar' },
 ]
 
