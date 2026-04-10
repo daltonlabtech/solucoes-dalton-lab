@@ -11,11 +11,13 @@ interface WaitlistModalProps {
   product: string
   productLabel: string
   price?: string
+  modalTitle?: string
+  ctaLabel?: string
 }
 
 type PriceAnswer = 'sim' | 'conversa' | 'nao' | ''
 
-export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 'R$ 297/mês' }: WaitlistModalProps) {
+export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 'R$ 297/mês', modalTitle = 'Garantir meu lugar', ctaLabel = 'Garantir meu lugar →' }: WaitlistModalProps) {
   const [nome, setNome] = useState('')
   const [whatsapp, setWhatsapp] = useState('')
   const [empresa, setEmpresa] = useState('')
@@ -98,14 +100,14 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
             <div className="text-4xl mb-4 gradient-text font-black">✓</div>
             <h2 className="text-2xl font-bold text-white mb-3">Tudo certo!</h2>
             <p className="text-dalton-gray-light">
-              Você está na lista. A gente entra em contato quando o <strong className="text-white">{productLabel}</strong> for lançado.
+              Perfeito! Você está entre os primeiros a testar o <strong className="text-white">{productLabel}</strong>. A gente entra em contato com acesso antes do lançamento público.
             </p>
             <button onClick={onClose} className="mt-6 text-dalton-cyan text-sm underline">Fechar</button>
           </div>
         ) : (
           <>
             <h2 id="modal-title" className="text-xl font-bold text-white mb-1">
-              Garantir meu lugar
+              {modalTitle}
             </h2>
             <p className="text-dalton-gray-light text-sm mb-6">
               {productLabel} · {price} · Cancele quando quiser
@@ -195,7 +197,7 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
               )}
 
               <Button type="submit" loading={loading} size="lg" className="w-full mt-2">
-                Garantir meu lugar →
+                {ctaLabel}
               </Button>
 
               <p className="text-xs text-dalton-gray-mid text-center">

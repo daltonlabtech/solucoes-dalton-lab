@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { HeroLP } from '@/components/sections/HeroLP'
 import { PainSection } from '@/components/sections/PainSection'
 import { SolutionSection } from '@/components/sections/SolutionSection'
-import { SocialProofPlaceholder } from '@/components/sections/SocialProofPlaceholder'
 import { PricingWaitlist } from '@/components/sections/PricingWaitlist'
 import { FAQSection } from '@/components/sections/FAQSection'
 import { WaitlistModal } from '@/components/WaitlistModal'
@@ -15,16 +14,20 @@ const PRODUCT_LABEL = 'Gerador de Propostas'
 
 const faqItems = [
   {
-    question: 'Funciona com o CRM que eu uso?',
-    answer: 'Funciona com Kommo, HubSpot e Pipedrive nativamente. Se você usa outro, a gente avalia na conversa de onboarding.',
-  },
-  {
     question: 'Posso usar o meu próprio template de proposta?',
     answer: 'Sim. Você sobe o template da sua empresa (PPT ou Word) e o sistema preenche nos campos que você definir. O visual continua sendo o seu.',
   },
   {
-    question: 'E se os dados do CRM estiverem incompletos?',
-    answer: 'O sistema avisa antes de gerar a proposta quais campos estão faltando — você completa ou deixa o vendedor completar antes de enviar.',
+    question: 'Quanto tempo leva para configurar?',
+    answer: 'Em média 30 minutos. Você sobe o template uma vez, define os campos e está pronto. O time acompanha no onboarding.',
+  },
+  {
+    question: 'Preciso ter um CRM para usar?',
+    answer: 'Não. Você preenche os dados do lead direto na plataforma — nome, empresa, produto, valor. Sem integração necessária.',
+  },
+  {
+    question: 'Quais campos posso incluir na proposta?',
+    answer: 'Qualquer campo que já esteja no seu template. Você define o mapeamento uma vez e o sistema preenche automaticamente a cada nova proposta.',
   },
   {
     question: 'O cliente vai saber que foi gerado automaticamente?',
@@ -43,6 +46,21 @@ const pricingRows = [
   { label: 'Suporte no lançamento', value: 'Direto com o time' },
 ]
 
+const validationQuotes = [
+  {
+    quote: 'Meu vendedor passa mais tempo formatando proposta do que em reunião.',
+    author: 'Gestor comercial, empresa de eventos',
+  },
+  {
+    quote: 'Já perdi cliente porque a proposta demorou. O concorrente foi mais rápido.',
+    author: 'Diretor de operações, empresa de tecnologia',
+  },
+  {
+    quote: 'Template atualizado fica em pendência semanas. Ninguém sabe qual versão usar.',
+    author: 'CEO, empresa de serviços B2B',
+  },
+]
+
 export default function GeradorPropostasPage() {
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -50,21 +68,22 @@ export default function GeradorPropostasPage() {
     <>
       <HeroLP
         badge="Gerador de Propostas"
-        headline="Proposta pronta em 1 minuto — direto do seu CRM."
-        subheadline="Chega de copiar e colar dado de lead no PowerPoint. O Gerador de Propostas puxa as informações do seu CRM, preenche no seu template e manda pro cliente — com rastreamento de abertura."
+        headline="Proposta pronta em 1 minuto — sem abrir o PowerPoint."
+        subheadline="Você preenche os dados do lead, o sistema monta a proposta no seu template e entrega pronta para enviar. Sem copiar e colar. Sem formatar nada."
+        ctaLabel="Quero acesso antecipado →"
         onCTA={() => setModalOpen(true)}
       />
 
       <PainSection
         title="41 horas por semana montando proposta não é processo — é desperdício."
         body={[
-          'Um vendedor que leva 10 minutos por proposta e manda 250 por mês gasta 41 horas só nisso. Horas que deveriam estar em reunião, em follow-up, em fechar.',
+          'Uma equipe de 5 vendedores que leva 10 minutos por proposta e manda 250 por mês gasta 41 horas coletivas só nisso. Horas que deveriam estar em reunião, em follow-up, em fechar.',
           'E no final, o cliente abre o PDF, vê que tem erro de digitação ou dado errado, e a credibilidade vai junto.',
         ]}
         stats={[
-          { value: '250', label: 'propostas/semana manuais (caso real: empresa de eventos)' },
+          { value: '250', label: 'propostas/mês numa equipe de 5 vendedores (caso real: empresa de eventos)' },
           { value: '41h', label: 'por semana perdidas em trabalho que uma máquina faz' },
-          { value: '4+', label: 'empresas classificaram essa dor como CRÍTICA na pesquisa Dalton Lab' },
+          { value: '100%', label: 'das equipes que entrevistamos montavam proposta no PowerPoint — manualmente' },
         ]}
       />
 
@@ -73,32 +92,63 @@ export default function GeradorPropostasPage() {
         steps={[
           {
             number: '1',
-            title: 'Conecta ao seu CRM',
-            description: 'Kommo, HubSpot, Pipedrive ou planilha. Puxa os dados do lead automaticamente: nome, empresa, produto de interesse, valor.',
+            title: 'Preenche os dados do lead',
+            description: 'Nome, empresa, produto de interesse, valor — você informa direto na plataforma. Sem integração, sem configuração complexa.',
           },
           {
             number: '2',
-            title: 'Preenche no seu template',
+            title: 'Gera no seu template — sem alterar nada',
             description: 'Você define o template uma vez. O sistema preenche, formata e gera o PDF ou PPTX com os dados certos.',
           },
           {
             number: '3',
-            title: 'Envia e rastreia',
-            description: 'Manda por email ou WhatsApp direto da plataforma. Você recebe notificação quando o cliente abre — e sabe a hora certa de ligar.',
+            title: 'Baixa e envia pro cliente',
+            description: 'A proposta sai pronta no visual da sua empresa. Você baixa ou manda direto pela plataforma — como preferir.',
           },
         ]}
         closing="Sem copiar e colar. Sem erros de digitação. Sem esperar o assistente ter tempo."
       />
 
-      <SocialProofPlaceholder />
+      {/* Validação com PMEs reais */}
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="divider-glow mb-16" />
 
-      <PricingWaitlist rows={pricingRows} onCTA={() => setModalOpen(true)} />
+          <h2 className="text-3xl md:text-4xl font-black text-white mb-3 leading-tight">
+            O que ouvimos de quem tem essa dor
+          </h2>
+          <p className="text-dalton-gray-light text-lg mb-10">
+            Conversamos com gestores comerciais de PMEs em diferentes setores.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {validationQuotes.map((item, i) => (
+              <div key={i} className="glass-card p-6 flex flex-col gap-4">
+                <p className="text-dalton-text-body leading-relaxed italic">
+                  &ldquo;{item.quote}&rdquo;
+                </p>
+                <p className="text-dalton-gray-mid text-sm mt-auto">— {item.author}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-dalton-gray-mid text-xs mt-8 text-center">
+            Relatos de entrevistas com participantes do programa de validação Dalton Lab.
+          </p>
+        </div>
+      </section>
+
+      <PricingWaitlist
+        rows={pricingRows}
+        onCTA={() => setModalOpen(true)}
+        ctaLabel="Quero acesso antecipado →"
+      />
 
       <FAQSection items={faqItems} />
 
       <div className="fixed bottom-0 left-0 right-0 md:hidden p-4 bg-dalton-bg/90 backdrop-blur border-t border-white/5 z-40">
         <Button size="lg" onClick={() => setModalOpen(true)} className="w-full">
-          Garantir meu lugar →
+          Quero acesso antecipado →
         </Button>
       </div>
 
@@ -107,6 +157,8 @@ export default function GeradorPropostasPage() {
         onClose={() => setModalOpen(false)}
         product={PRODUCT}
         productLabel={PRODUCT_LABEL}
+        modalTitle="Entrar na lista de espera"
+        ctaLabel="Confirmar minha vaga →"
       />
     </>
   )

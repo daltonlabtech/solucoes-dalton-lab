@@ -10,9 +10,10 @@ interface PricingRow {
 interface PricingWaitlistProps {
   rows: PricingRow[]
   onCTA: () => void
+  ctaLabel?: string
 }
 
-export function PricingWaitlist({ rows, onCTA }: PricingWaitlistProps) {
+export function PricingWaitlist({ rows, onCTA, ctaLabel = 'Garantir meu lugar →' }: PricingWaitlistProps) {
   return (
     <section className="py-20 px-6 bg-white/[0.01]">
       <div className="max-w-2xl mx-auto">
@@ -38,7 +39,7 @@ export function PricingWaitlist({ rows, onCTA }: PricingWaitlistProps) {
 
         <div className="flex flex-col items-center mt-8 gap-3">
           <Button size="lg" onClick={onCTA} className="w-full max-w-sm">
-            Garantir meu lugar →
+            {ctaLabel}
           </Button>
           <div className="flex items-center gap-2 text-dalton-gray-mid text-sm">
             <Check size={14} className="text-dalton-cyan flex-shrink-0" />

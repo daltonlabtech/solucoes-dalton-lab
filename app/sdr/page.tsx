@@ -93,7 +93,7 @@ export default function SDRWhatsAppPage() {
 
       <WhatsAppProof />
 
-      <PricingWaitlist rows={pricingRows} onCTA={() => setModalOpen(true)} />
+      <PricingWaitlist rows={pricingRows} onCTA={() => setModalOpen(true)} ctaLabel="Quero uma das primeiras vagas →" />
 
       <FAQSection items={faqItems} />
 
