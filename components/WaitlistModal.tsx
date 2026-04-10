@@ -25,7 +25,6 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
   const [error, setError] = useState('')
   const firstInputRef = useRef<HTMLInputElement>(null)
 
-  // Foco no primeiro campo ao abrir
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => firstInputRef.current?.focus(), 50)
@@ -36,7 +35,6 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
-  // Fechar com ESC
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', handler)
@@ -69,6 +67,8 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
     }
   }
 
+  const inputClass = 'w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-dalton-gray-mid focus:outline-none focus:border-dalton-cyan/50 transition-colors'
+
   return (
     <div
       role="dialog"
@@ -95,7 +95,7 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
 
         {success ? (
           <div className="text-center py-6">
-            <div className="text-4xl mb-4">✓</div>
+            <div className="text-4xl mb-4 gradient-text font-black">✓</div>
             <h2 className="text-2xl font-bold text-white mb-3">Tudo certo!</h2>
             <p className="text-dalton-gray-light">
               Você está na lista. A gente entra em contato quando o <strong className="text-white">{productLabel}</strong> for lançado.
@@ -114,7 +114,7 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
             <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
               <div>
                 <label htmlFor="nome" className="text-sm text-dalton-gray-light mb-1 block">
-                  Nome <span aria-hidden="true" className="text-dalton-magenta">*</span>
+                  Nome <span aria-hidden="true" className="text-dalton-cyan">*</span>
                 </label>
                 <input
                   ref={firstInputRef}
@@ -124,14 +124,14 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
                   autoComplete="name"
                   value={nome}
                   onChange={e => setNome(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-dalton-gray-mid focus:outline-none focus:border-dalton-cyan/50 transition-colors"
+                  className={inputClass}
                   placeholder="Seu nome"
                 />
               </div>
 
               <div>
                 <label htmlFor="whatsapp" className="text-sm text-dalton-gray-light mb-1 block">
-                  WhatsApp <span aria-hidden="true" className="text-dalton-magenta">*</span>
+                  WhatsApp <span aria-hidden="true" className="text-dalton-cyan">*</span>
                 </label>
                 <input
                   id="whatsapp"
@@ -141,14 +141,14 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
                   inputMode="tel"
                   value={whatsapp}
                   onChange={e => setWhatsapp(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-dalton-gray-mid focus:outline-none focus:border-dalton-cyan/50 transition-colors"
+                  className={inputClass}
                   placeholder="(11) 99999-9999"
                 />
               </div>
 
               <div>
                 <label htmlFor="empresa" className="text-sm text-dalton-gray-light mb-1 block">
-                  Empresa <span aria-hidden="true" className="text-dalton-magenta">*</span>
+                  Empresa <span aria-hidden="true" className="text-dalton-cyan">*</span>
                 </label>
                 <input
                   id="empresa"
@@ -157,12 +157,11 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
                   autoComplete="organization"
                   value={empresa}
                   onChange={e => setEmpresa(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-dalton-gray-mid focus:outline-none focus:border-dalton-cyan/50 transition-colors"
+                  className={inputClass}
                   placeholder="Nome da sua empresa"
                 />
               </div>
 
-              {/* Pergunta de preço */}
               <div>
                 <p className="text-sm text-dalton-gray-light mb-2">
                   Esse preço faz sentido para o seu negócio agora?
@@ -192,7 +191,7 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
               </div>
 
               {error && (
-                <p role="alert" className="text-dalton-magenta text-sm">{error}</p>
+                <p role="alert" className="text-red-400 text-sm">{error}</p>
               )}
 
               <Button type="submit" loading={loading} size="lg" className="w-full mt-2">

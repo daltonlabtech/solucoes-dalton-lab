@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { HeroLP } from '@/components/sections/HeroLP'
 import { PainSection } from '@/components/sections/PainSection'
 import { SolutionSection } from '@/components/sections/SolutionSection'
-import { SocialProofPlaceholder } from '@/components/sections/SocialProofPlaceholder'
+import { WhatsAppProof } from '@/components/sections/WhatsAppProof'
 import { PricingWaitlist } from '@/components/sections/PricingWaitlist'
 import { FAQSection } from '@/components/sections/FAQSection'
 import { WaitlistModal } from '@/components/WaitlistModal'
@@ -52,6 +52,7 @@ export default function SDRWhatsAppPage() {
         badge="SDR WhatsApp"
         headline="Seu WhatsApp atende — mesmo quando você não está."
         subheadline="Lead que espera mais de 5 minutos tem 10x menos chance de comprar. O SDR WhatsApp responde, classifica e qualifica — e só chama você quando o cliente está pronto."
+        ctaLabel="Testar com meu WhatsApp →"
         onCTA={() => setModalOpen(true)}
       />
 
@@ -90,7 +91,7 @@ export default function SDRWhatsAppPage() {
         closing="Não é um bot genérico. É um SDR treinado no seu negócio."
       />
 
-      <SocialProofPlaceholder />
+      <WhatsAppProof />
 
       <PricingWaitlist rows={pricingRows} onCTA={() => setModalOpen(true)} />
 

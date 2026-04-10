@@ -1,6 +1,7 @@
 // components/layout/Navbar.tsx
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
@@ -18,17 +19,22 @@ export function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-dalton-bg/80 backdrop-blur-lg">
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" role="navigation" aria-label="Navegação principal">
-        <Link href="/" className="flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-dalton-cyan rounded">
-          <span className="text-xl font-black text-white tracking-tight">
-            Dalton <span className="gradient-text">Lab</span>
-          </span>
+        <Link href="/" className="flex items-center focus-visible:ring-2 focus-visible:ring-dalton-cyan rounded">
+          <Image
+            src="/logo.png"
+            alt="Dalton Lab"
+            width={182}
+            height={38}
+            className="w-40 h-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop */}
         <ul className="hidden md:flex items-center gap-6">
           {links.map(l => (
             <li key={l.href}>
-              <Link href={l.href} className="text-sm text-dalton-gray-light hover:text-white transition-colors duration-150 focus-visible:outline-none focus-visible:text-dalton-cyan">
+              <Link href={l.href} className="text-sm text-slate-300 hover:text-white transition-colors duration-150 focus-visible:outline-none focus-visible:text-dalton-cyan">
                 {l.label}
               </Link>
             </li>
@@ -41,7 +47,7 @@ export function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden text-dalton-gray-light hover:text-white p-2 rounded focus-visible:ring-2 focus-visible:ring-dalton-cyan"
+          className="md:hidden text-slate-300 hover:text-white p-2 rounded focus-visible:ring-2 focus-visible:ring-dalton-cyan"
           onClick={() => setOpen(!open)}
           aria-label={open ? 'Fechar menu' : 'Abrir menu'}
           aria-expanded={open}
@@ -58,7 +64,7 @@ export function Navbar() {
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  className="text-dalton-gray-light hover:text-white transition-colors block py-1"
+                  className="text-slate-300 hover:text-white transition-colors block py-1"
                   onClick={() => setOpen(false)}
                 >
                   {l.label}

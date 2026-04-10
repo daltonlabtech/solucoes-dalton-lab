@@ -4,9 +4,9 @@
 @theme {
   --color-dalton-bg: #0a1628;
   --color-dalton-bg-card: rgba(255, 255, 255, 0.03);
-  --color-dalton-cyan: #33ADE5;
-  --color-dalton-purple: #A855F7;
-  --color-dalton-magenta: #EC4899;
+  --color-dalton-cyan: #F97316;
+  --color-dalton-orange: #F97316;
+  --color-dalton-amber: #D97706;
   --color-dalton-white: #ffffff;
   --color-dalton-gray-light: #94a3b8;
   --color-dalton-gray-mid: #64748b;
@@ -15,34 +15,34 @@
 
   --font-family-sans: 'Plus Jakarta Sans', Inter, sans-serif;
 
-  --background-image-gradient-cyan-purple: linear-gradient(90deg, #33ADE5, #A855F7);
-  --background-image-gradient-glow: radial-gradient(circle, rgba(51, 173, 229, 0.15) 0%, transparent 70%);
+  --background-image-gradient-cyan-purple: linear-gradient(90deg, #F97316, #D97706);
+  --background-image-gradient-glow: radial-gradient(circle, rgba(249, 115, 22, 0.12) 0%, transparent 70%);
 
   --radius-DEFAULT: 12px;
   --radius-lg: 16px;
 }
 
 :root {
-  --bg: #0a1628;
-  --cyan: #33ADE5;
-  --purple: #A855F7;
-  --magenta: #EC4899;
+  --accent: #F97316;
+  --amber: #D97706;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-body {
-  background-color: var(--bg);
-  color: #e2e8f0;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
+@layer base {
+  body {
+    background-color: #0a1628;
+    color: #e2e8f0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
 }
 
 /* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(90deg, #33ADE5, #A855F7);
+  background: linear-gradient(90deg, #F97316, #D97706);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -58,15 +58,15 @@ body {
 
 /* Highlight box (dor/citação) */
 .highlight-box {
-  border-left: 4px solid #33ADE5;
+  border-left: 4px solid #F97316;
   padding-left: 20px;
-  background: linear-gradient(90deg, rgba(51, 173, 229, 0.08), transparent);
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.08), transparent);
 }
 
 /* Divider decorativo */
 .divider-glow {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(51, 173, 229, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
   width: 100%;
 }
 

@@ -13,9 +13,9 @@ const config: Config = {
         dalton: {
           bg: '#0a1628',
           'bg-card': 'rgba(255,255,255,0.03)',
-          cyan: '#33ADE5',
-          purple: '#A855F7',
-          magenta: '#EC4899',
+          cyan: '#F97316',
+          orange: '#F97316',
+          amber: '#D97706',
           white: '#ffffff',
           'gray-light': '#94a3b8',
           'gray-mid': '#64748b',
@@ -27,8 +27,8 @@ const config: Config = {
         sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
       },
       backgroundImage: {
-        'gradient-cyan-purple': 'linear-gradient(90deg, #33ADE5, #A855F7)',
-        'gradient-glow': 'radial-gradient(circle, rgba(51,173,229,0.15) 0%, transparent 70%)',
+        'gradient-cyan-purple': 'linear-gradient(90deg, #F97316, #D97706)',
+        'gradient-glow': 'radial-gradient(circle, rgba(249,115,22,0.12) 0%, transparent 70%)',
       },
       borderRadius: {
         DEFAULT: '12px',

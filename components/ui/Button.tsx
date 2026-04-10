@@ -15,7 +15,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const base = 'inline-flex items-center justify-center font-semibold transition-all duration-200 cursor-pointer rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-dalton-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-dalton-bg disabled:opacity-50 disabled:cursor-not-allowed'
 
     const variants = {
-      primary: 'bg-dalton-cyan text-dalton-bg hover:brightness-110 active:scale-[0.98]',
+      primary: 'bg-dalton-cyan text-white hover:brightness-110 active:scale-[0.98]',
       secondary: 'border border-dalton-cyan/40 text-dalton-cyan hover:bg-dalton-cyan/10 active:scale-[0.98]',
       ghost: 'text-dalton-gray-light hover:text-white hover:bg-white/5',
     }
