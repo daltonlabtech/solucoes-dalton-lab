@@ -16,7 +16,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       primary: 'text-white hover:brightness-110 active:scale-[0.98]',
-      secondary: 'border text-white hover:brightness-110 active:scale-[0.98]',
+      secondary: 'border btn-secondary-hover active:scale-[0.98]',
       ghost: 'text-dalton-gray-light hover:text-white hover:bg-white/5',
     }
 

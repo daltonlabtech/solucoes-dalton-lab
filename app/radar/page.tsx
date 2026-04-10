@@ -60,7 +60,7 @@ export default function RadarPage() {
             { value: '100%', label: 'web — sem instalar nada' },
             { value: '24h', label: 'análise diária automática' },
           ].map(stat => (
-            <div key={stat.value} className="glass-card p-6 text-center border-t-2 border-dalton-cyan/30">
+            <div key={stat.value} className="glass-card p-6 text-center border-t-2" style={{ borderTopColor: 'color-mix(in srgb, var(--lp-accent) 30%, transparent)' }}>
               <p className="text-3xl font-black gradient-text mb-2">{stat.value}</p>
               <p className="text-dalton-gray-light text-sm">{stat.label}</p>
             </div>

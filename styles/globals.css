@@ -71,6 +71,11 @@ html {
   width: 100%;
 }
 
+/* Secondary button hover (accent-aware) */
+.btn-secondary-hover:hover {
+  background: color-mix(in srgb, var(--lp-accent) 10%, transparent);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0a1628; }
