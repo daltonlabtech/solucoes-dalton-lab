@@ -4,8 +4,8 @@
 @theme {
   --color-dalton-bg: #0a1628;
   --color-dalton-bg-card: rgba(255, 255, 255, 0.03);
-  --color-dalton-cyan: #F97316;
-  --color-dalton-orange: #F97316;
+  --color-dalton-cyan: #7C3AED;
+  --color-dalton-orange: #7C3AED;
   --color-dalton-amber: #D97706;
   --color-dalton-white: #ffffff;
   --color-dalton-gray-light: #94a3b8;
@@ -15,16 +15,17 @@
 
   --font-family-sans: 'Plus Jakarta Sans', Inter, sans-serif;
 
-  --background-image-gradient-cyan-purple: linear-gradient(90deg, #F97316, #D97706);
-  --background-image-gradient-glow: radial-gradient(circle, rgba(249, 115, 22, 0.12) 0%, transparent 70%);
+  --background-image-gradient-cyan-purple: linear-gradient(135deg, #7C3AED, #00FFFF);
+  --background-image-gradient-glow: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
 
   --radius-DEFAULT: 12px;
   --radius-lg: 16px;
 }
 
 :root {
-  --accent: #F97316;
+  --accent: #7C3AED;
   --amber: #D97706;
+  --lp-accent: #7C3AED;
 }
 
 html {
@@ -42,7 +43,7 @@ html {
 
 /* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(90deg, #F97316, #D97706);
+  background: linear-gradient(135deg, #7C3AED, #00FFFF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -58,15 +59,15 @@ html {
 
 /* Highlight box (dor/citação) */
 .highlight-box {
-  border-left: 4px solid #F97316;
+  border-left: 4px solid var(--lp-accent);
   padding-left: 20px;
-  background: linear-gradient(90deg, rgba(249, 115, 22, 0.08), transparent);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--lp-accent) 8%, transparent), transparent);
 }
 
 /* Divider decorativo */
 .divider-glow {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--lp-accent) 30%, transparent), transparent);
   width: 100%;
 }
 

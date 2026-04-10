@@ -65,7 +65,7 @@ export default function GeradorPropostasPage() {
   const [modalOpen, setModalOpen] = useState(false)
 
   return (
-    <>
+    <div style={{ '--lp-accent': '#3B82F6' } as React.CSSProperties}>
       <HeroLP
         badge="Gerador de Propostas"
         headline="Proposta pronta em 1 minuto — sem abrir o PowerPoint."
@@ -160,6 +160,6 @@ export default function GeradorPropostasPage() {
         modalTitle="Entrar na lista de espera"
         ctaLabel="Confirmar minha vaga →"
       />
-    </>
+    </div>
   )
 }

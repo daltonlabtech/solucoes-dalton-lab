@@ -89,10 +89,10 @@ export function WhatsAppProof() {
 
               {/* Handoff */}
               <div
-                className="mt-2 rounded-lg px-4 py-3 border border-orange-500/20"
-                style={{ background: 'rgba(249, 115, 22, 0.07)' }}
+                className="mt-2 rounded-lg px-4 py-3 border border-green-500/20"
+                style={{ background: 'rgba(37, 211, 102, 0.07)' }}
               >
-                <p className="text-orange-400 text-xs font-semibold mb-1">🔔 Ana recebeu o lead</p>
+                <p className="text-green-400 text-xs font-semibold mb-1">🔔 Ana recebeu o lead</p>
                 <p className="text-[#8696a0] text-xs leading-snug">
                   Quer pacote mensal, perguntou sobre preço. Pronto para agendar.
                 </p>

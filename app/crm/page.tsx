@@ -47,7 +47,7 @@ export default function TranscricaoCRMPage() {
   const [modalOpen, setModalOpen] = useState(false)
 
   return (
-    <>
+    <div style={{ '--lp-accent': '#14B8A6' } as React.CSSProperties}>
       <HeroLP
         badge="Transcrição + CRM"
         headline="Cada reunião vira tarefa no CRM — sem você digitar nada."
@@ -108,6 +108,6 @@ export default function TranscricaoCRMPage() {
         product={PRODUCT}
         productLabel={PRODUCT_LABEL}
       />
-    </>
+    </div>
   )
 }

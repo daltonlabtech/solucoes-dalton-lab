@@ -31,7 +31,7 @@ const faqItems = [
 
 export default function RadarPage() {
   return (
-    <>
+    <div style={{ '--lp-accent': '#D97706' } as React.CSSProperties}>
       <section className="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-6 py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-glow pointer-events-none" aria-hidden="true" />
         <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-6">
@@ -108,6 +108,6 @@ export default function RadarPage() {
           </a>
         </div>
       </section>
-    </>
+    </div>
   )
 }

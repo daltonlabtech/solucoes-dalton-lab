@@ -22,7 +22,13 @@ export function SolutionSection({ title, steps, closing }: SolutionSectionProps)
         <div className="flex flex-col gap-6">
           {steps.map((step, i) => (
             <div key={i} className="flex gap-6 items-start">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-dalton-cyan/10 border border-dalton-cyan/30 flex items-center justify-center">
+              <div
+                className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
+                style={{
+                  background: 'color-mix(in srgb, var(--lp-accent) 10%, transparent)',
+                  border: '1px solid color-mix(in srgb, var(--lp-accent) 30%, transparent)',
+                }}
+              >
                 <span className="gradient-text font-black text-lg">{step.number}</span>
               </div>
               <div className="glass-card flex-1 p-6">
