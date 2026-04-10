@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import posthog from 'posthog-js';
+import { trackCtaClick } from '@/lib/posthog';
 
 interface Props {
   checkoutUrl: string;
@@ -22,14 +22,12 @@ const socialHandles = [
 export default function LandingHero({ checkoutUrl }: Props) {
   return (
     <section style={{ background: '#0C0C0E' }} className="relative overflow-hidden">
-      {/* Glow de fundo sutil */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full opacity-20 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse, #2563EB 0%, transparent 70%)' }}
       />
 
       <div className="relative max-w-6xl mx-auto px-6 pt-20 md:pt-28">
-        {/* Eyebrow */}
         <div className="inline-flex items-center gap-2 border border-white/15 rounded-full px-4 py-1.5 mb-10">
           <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" />
           <span className="text-white/65 text-xs font-medium tracking-widest uppercase">
@@ -37,7 +35,6 @@ export default function LandingHero({ checkoutUrl }: Props) {
           </span>
         </div>
 
-        {/* Headline */}
         <h1
           style={{ fontFamily: 'var(--font-display)' }}
           className="text-5xl md:text-7xl text-white leading-[1.05] mb-6 max-w-3xl"
@@ -45,20 +42,14 @@ export default function LandingHero({ checkoutUrl }: Props) {
           Você posta todo dia e não sabe o que funciona?
         </h1>
 
-        {/* Subheadline */}
         <p className="text-lg md:text-xl text-white/60 max-w-lg mb-10 leading-relaxed">
           Métricas, relatórios e análise por IA — sem planilha, sem trabalho manual.
         </p>
 
-        {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-8">
           <a
             href={checkoutUrl}
-            onClick={(e) => {
-              e.preventDefault();
-              posthog.capture('cta_clicked', { plan: 'radar', location: 'hero' });
-              setTimeout(() => { window.location.href = checkoutUrl; }, 300);
-            }}
+            onClick={(e) => { e.preventDefault(); trackCtaClick(checkoutUrl, 'hero'); }}
             className="inline-flex items-center gap-2 bg-[#2563EB] text-white font-semibold px-7 py-3.5 rounded-lg hover:bg-[#1D4ED8] transition-colors text-base"
           >
             Começar agora
@@ -67,7 +58,6 @@ export default function LandingHero({ checkoutUrl }: Props) {
           <span className="text-white/55 text-sm">Cancele quando quiser</span>
         </div>
 
-        {/* Trust badges */}
         <div className="flex flex-wrap gap-x-6 gap-y-2 mb-6">
           {trustBadges.map((b) => (
             <div key={b.label} className="flex items-center gap-2">
@@ -82,7 +72,6 @@ export default function LandingHero({ checkoutUrl }: Props) {
           ))}
         </div>
 
-        {/* Social proof strip */}
         <div
           className="flex flex-wrap items-center gap-3 mb-16 pb-6"
           style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
@@ -104,14 +93,12 @@ export default function LandingHero({ checkoutUrl }: Props) {
           ))}
         </div>
 
-        {/* Screenshot com glow */}
         <div className="relative">
           <div
             className="absolute -inset-4 opacity-30 rounded-2xl pointer-events-none"
             style={{ background: 'radial-gradient(ellipse at 50% 100%, #2563EB 0%, transparent 60%)' }}
           />
 
-          {/* Desktop */}
           <div className="relative hidden md:block rounded-t-2xl overflow-hidden border border-white/10 shadow-2xl">
             <Image
               src="/dashboard-screenshot.png"
@@ -124,19 +111,14 @@ export default function LandingHero({ checkoutUrl }: Props) {
             />
           </div>
 
-          {/* Mobile: zoom no topo */}
           <div className="relative md:hidden rounded-2xl overflow-hidden border border-white/10 shadow-2xl" style={{ height: 200 }}>
-            <div style={{ transform: 'scale(1.8)', transformOrigin: 'top left', width: '56%' }}>
-              <Image
-                src="/dashboard-screenshot.png"
-                alt="Dashboard de analytics do Instagram"
-                width={1200}
-                height={750}
-                className="w-full block"
-                sizes="(min-width: 768px) 0px, 56vw"
-                priority
-              />
-            </div>
+            <Image
+              src="/dashboard-screenshot.png"
+              alt="Dashboard de analytics do Instagram"
+              fill
+              className="object-cover object-left-top"
+              sizes="(min-width: 768px) 0px, 100vw"
+            />
           </div>
         </div>
       </div>

@@ -26,7 +26,7 @@ export default function LandingSolution() {
         <div>
           {solutions.map((s, i) => (
             <div
-              key={i}
+              key={s.benefit}
               className="py-10 border-t border-[#E2E8F0] grid gap-6"
               style={{ gridTemplateColumns: '72px 1fr' }}
             >

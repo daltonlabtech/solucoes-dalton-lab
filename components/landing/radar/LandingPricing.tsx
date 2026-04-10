@@ -1,6 +1,6 @@
 'use client';
 
-import posthog from 'posthog-js';
+import { trackCtaClick } from '@/lib/posthog';
 
 interface Props {
   checkoutUrl: string;
@@ -25,7 +25,6 @@ export default function LandingPricing({ checkoutUrl }: Props) {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          {/* Left: headline */}
           <div>
             <h2
               style={{ fontFamily: 'var(--font-display)' }}
@@ -38,7 +37,6 @@ export default function LandingPricing({ checkoutUrl }: Props) {
             </p>
           </div>
 
-          {/* Right: card */}
           <div
             className="rounded-2xl p-8"
             style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.08)' }}
@@ -65,11 +63,7 @@ export default function LandingPricing({ checkoutUrl }: Props) {
 
             <a
               href={checkoutUrl}
-              onClick={(e) => {
-                e.preventDefault();
-                posthog.capture('cta_clicked', { plan: 'radar', location: 'pricing' });
-                setTimeout(() => { window.location.href = checkoutUrl; }, 300);
-              }}
+              onClick={(e) => { e.preventDefault(); trackCtaClick(checkoutUrl, 'pricing'); }}
               className="flex items-center justify-center gap-2 w-full bg-[#2563EB] text-white font-semibold py-4 rounded-xl hover:bg-[#1D4ED8] transition-colors text-base"
             >
               Assinar agora

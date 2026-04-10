@@ -1,4 +1,3 @@
-// app/radar/page.tsx
 import type { Metadata } from 'next'
 import LandingHero from '@/components/landing/radar/LandingHero'
 import LandingPain from '@/components/landing/radar/LandingPain'
@@ -24,7 +23,6 @@ export default function RadarPage() {
       <LandingPricing checkoutUrl={CHECKOUT_URL} />
       <LandingFAQ />
 
-      {/* CTA final */}
       <section style={{ background: '#0C0C0E' }} className="py-24 px-6 text-center">
         <div
           style={{ fontFamily: 'var(--font-mono)' }}

@@ -17,4 +17,9 @@ export function initPostHog() {
   })
 }
 
+export function trackCtaClick(url: string, location: string) {
+  posthog.capture('cta_clicked', { plan: 'radar', location });
+  setTimeout(() => { window.location.href = url; }, 300);
+}
+
 export { posthog }
