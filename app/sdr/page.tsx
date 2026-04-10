@@ -47,7 +47,7 @@ export default function SDRWhatsAppPage() {
   const [modalOpen, setModalOpen] = useState(false)
 
   return (
-    <>
+    <div style={{ '--lp-accent': '#25D366' } as React.CSSProperties}>
       <HeroLP
         badge="SDR WhatsApp"
         headline="Seu WhatsApp atende — mesmo quando você não está."
@@ -110,6 +110,6 @@ export default function SDRWhatsAppPage() {
         product={PRODUCT}
         productLabel={PRODUCT_LABEL}
       />
-    </>
+    </div>
   )
 }

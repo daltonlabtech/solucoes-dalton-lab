@@ -11,14 +11,25 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', loading, children, disabled, asChild, ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', loading, children, disabled, asChild, style: styleProp, ...props }, ref) => {
     const base = 'inline-flex items-center justify-center font-semibold transition-all duration-200 cursor-pointer rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-dalton-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-dalton-bg disabled:opacity-50 disabled:cursor-not-allowed'
 
     const variants = {
-      primary: 'bg-dalton-cyan text-white hover:brightness-110 active:scale-[0.98]',
-      secondary: 'border border-dalton-cyan/40 text-dalton-cyan hover:bg-dalton-cyan/10 active:scale-[0.98]',
+      primary: 'text-white hover:brightness-110 active:scale-[0.98]',
+      secondary: 'border btn-secondary-hover active:scale-[0.98]',
       ghost: 'text-dalton-gray-light hover:text-white hover:bg-white/5',
     }
+
+    const accentStyle =
+      variant === 'primary'
+        ? { backgroundColor: 'var(--lp-accent)' }
+        : variant === 'secondary'
+          ? {
+              borderColor: 'color-mix(in srgb, var(--lp-accent) 40%, transparent)',
+              color: 'var(--lp-accent)',
+              backgroundColor: 'transparent',
+            }
+          : undefined
 
     const sizes = {
       sm: 'px-5 py-2.5 text-sm',
@@ -32,6 +43,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         ref={ref}
         className={cn(base, variants[variant], sizes[size], className)}
+        style={{ ...accentStyle, ...styleProp }}
         disabled={disabled || loading}
         {...props}
       >

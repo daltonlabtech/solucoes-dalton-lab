@@ -30,7 +30,7 @@ export function PainSection({ title, body, stats }: PainSectionProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {stats.map((stat, i) => (
-            <div key={i} className="glass-card p-6 text-center border-t-2 border-dalton-cyan/30">
+            <div key={i} className="glass-card p-6 text-center border-t-2" style={{ borderTopColor: 'color-mix(in srgb, var(--lp-accent) 30%, transparent)' }}>
               <p className="text-2xl font-black gradient-text mb-2">{stat.value}</p>
               <p className="text-dalton-gray-light text-sm leading-snug">{stat.label}</p>
             </div>

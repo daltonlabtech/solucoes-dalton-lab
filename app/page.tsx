@@ -53,7 +53,7 @@ export default function HubPage() {
       <section className="relative flex flex-col items-center justify-center text-center px-6 py-28 overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(circle at 50% 40%, rgba(249,115,22,0.08) 0%, transparent 65%)' }}
+          style={{ background: 'radial-gradient(circle at 50% 40%, rgba(124,58,237,0.08) 0%, transparent 65%)' }}
           aria-hidden="true"
         />
         <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-6">

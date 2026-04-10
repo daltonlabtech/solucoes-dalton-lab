@@ -31,7 +31,7 @@ const faqItems = [
 
 export default function RadarPage() {
   return (
-    <>
+    <div style={{ '--lp-accent': '#D97706' } as React.CSSProperties}>
       <section className="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-6 py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-glow pointer-events-none" aria-hidden="true" />
         <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-6">
@@ -60,7 +60,7 @@ export default function RadarPage() {
             { value: '100%', label: 'web — sem instalar nada' },
             { value: '24h', label: 'análise diária automática' },
           ].map(stat => (
-            <div key={stat.value} className="glass-card p-6 text-center border-t-2 border-dalton-cyan/30">
+            <div key={stat.value} className="glass-card p-6 text-center border-t-2" style={{ borderTopColor: 'color-mix(in srgb, var(--lp-accent) 30%, transparent)' }}>
               <p className="text-3xl font-black gradient-text mb-2">{stat.value}</p>
               <p className="text-dalton-gray-light text-sm">{stat.label}</p>
             </div>
@@ -108,6 +108,6 @@ export default function RadarPage() {
           </a>
         </div>
       </section>
-    </>
+    </div>
   )
 }
