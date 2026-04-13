@@ -16,11 +16,20 @@ interface WaitlistModalProps {
 }
 
 type PriceAnswer = 'sim' | 'conversa' | 'nao' | ''
+type CompanySize = '1-5' | '6-20' | '21-100' | '100+' | ''
+
+function formatWhatsApp(value: string): string {
+  const digits = value.replace(/\D/g, '').slice(0, 11)
+  if (digits.length <= 2) return digits.length ? `(${digits}` : ''
+  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`
+  if (digits.length <= 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`
+}
 
 export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 'R$ 297/mês', modalTitle = 'Garantir meu lugar', ctaLabel = 'Garantir meu lugar →' }: WaitlistModalProps) {
   const [nome, setNome] = useState('')
   const [whatsapp, setWhatsapp] = useState('')
-  const [empresa, setEmpresa] = useState('')
+  const [companySize, setCompanySize] = useState<CompanySize>('')
   const [priceAnswer, setPriceAnswer] = useState<PriceAnswer>('')
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -61,6 +70,9 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    const digits = whatsapp.replace(/\D/g, '')
+    if (digits.length < 10) { setError('Informe um WhatsApp válido.'); return }
+    if (!companySize) { setError('Selecione o tamanho da sua empresa.'); return }
     if (!priceAnswer) { setError('Responda a pergunta sobre o preço.'); return }
     setLoading(true)
     setError('')
@@ -69,7 +81,7 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, whatsapp, empresa, price_answer: priceAnswer, product }),
+        body: JSON.stringify({ nome, whatsapp, company_size: companySize, price_answer: priceAnswer, product }),
       })
 
       if (!res.ok) throw new Error('Erro ao enviar')
@@ -158,28 +170,41 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
                   type="tel"
                   required
                   autoComplete="tel"
-                  inputMode="tel"
+                  inputMode="numeric"
                   value={whatsapp}
-                  onChange={e => setWhatsapp(e.target.value)}
+                  onChange={e => setWhatsapp(formatWhatsApp(e.target.value))}
                   className={inputClass}
                   placeholder="(11) 99999-9999"
                 />
               </div>
 
               <div>
-                <label htmlFor="empresa" className="text-sm text-dalton-gray-light mb-1 block">
-                  Empresa <span aria-hidden="true" className="text-dalton-cyan">*</span>
-                </label>
-                <input
-                  id="empresa"
-                  type="text"
-                  required
-                  autoComplete="organization"
-                  value={empresa}
-                  onChange={e => setEmpresa(e.target.value)}
-                  className={inputClass}
-                  placeholder="Nome da sua empresa"
-                />
+                <p className="text-sm text-dalton-gray-light mb-2">
+                  Tamanho da empresa <span aria-hidden="true" className="text-dalton-cyan">*</span>
+                </p>
+                <div className="flex flex-col gap-2" role="radiogroup" aria-required="true">
+                  {[
+                    { value: '1-5', label: '1–5 pessoas' },
+                    { value: '6-20', label: '6–20 pessoas' },
+                    { value: '21-100', label: '21–100 pessoas' },
+                    { value: '100+', label: '100+ pessoas' },
+                  ].map(opt => (
+                    <label key={opt.value} className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${companySize === opt.value ? 'border-dalton-cyan/50 bg-dalton-cyan/10 text-white' : 'border-white/10 text-dalton-gray-light hover:border-white/20'}`}>
+                      <input
+                        type="radio"
+                        name="company_size"
+                        value={opt.value}
+                        checked={companySize === opt.value}
+                        onChange={() => setCompanySize(opt.value as CompanySize)}
+                        className="sr-only"
+                      />
+                      <span className={`w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center ${companySize === opt.value ? 'border-dalton-cyan' : 'border-white/30'}`}>
+                        {companySize === opt.value && <span className="w-2 h-2 rounded-full bg-dalton-cyan" />}
+                      </span>
+                      <span className="text-sm">{opt.label}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
 
               <div>
