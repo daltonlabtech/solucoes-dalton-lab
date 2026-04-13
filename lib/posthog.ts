@@ -5,6 +5,9 @@ export function initPostHog() {
   if (typeof window === 'undefined') return
   if (!process.env.NEXT_PUBLIC_POSTHOG_KEY) return
 
+  // Expõe instância no window para testes E2E (inofensivo em prod)
+  ;(window as any).__posthog = posthog
+
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? 'https://app.posthog.com',
     capture_pageview: false, // vamos controlar manualmente

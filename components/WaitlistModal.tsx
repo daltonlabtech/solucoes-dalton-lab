@@ -31,17 +31,31 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
     if (isOpen) {
       setTimeout(() => firstInputRef.current?.focus(), 50)
       document.body.style.overflow = 'hidden'
+      posthog.capture('waitlist_modal_opened', {
+        product,
+        source_page: window.location.pathname,
+      })
     } else {
       document.body.style.overflow = ''
     }
     return () => { document.body.style.overflow = '' }
-  }, [isOpen])
+  }, [isOpen, product])
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [onClose])
+
+  function handleClose() {
+    if (!success) {
+      posthog.capture('waitlist_modal_abandoned', {
+        product,
+        source_page: window.location.pathname,
+      })
+    }
+    onClose()
+  }
 
   if (!isOpen) return null
 
@@ -60,7 +74,11 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
 
       if (!res.ok) throw new Error('Erro ao enviar')
 
-      posthog.capture('waitlist_signup', { product, price_answer: priceAnswer })
+      posthog.capture('waitlist_signup', {
+        product,
+        price_answer: priceAnswer,
+        source_page: window.location.pathname,
+      })
       setSuccess(true)
     } catch {
       setError('Algo deu errado. Tente novamente.')
@@ -81,14 +99,14 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, price = 
       {/* Scrim */}
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
+        onClick={handleClose}
         aria-hidden="true"
       />
 
       {/* Modal */}
       <div className="relative w-full max-w-md glass-card p-8 shadow-2xl border border-dalton-cyan/20">
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-4 right-4 text-dalton-gray-mid hover:text-white transition-colors p-1 rounded focus-visible:ring-2 focus-visible:ring-dalton-cyan"
           aria-label="Fechar"
         >
