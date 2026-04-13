@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 interface WaitlistPayload {
   nome: string
   whatsapp: string
-  empresa: string
+  company_size: '1-5' | '6-20' | '21-100' | '100+'
   price_answer: 'sim' | 'conversa' | 'nao'
   product: string
 }
@@ -18,9 +18,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  const { nome, whatsapp, empresa, price_answer, product } = body
+  const { nome, whatsapp, company_size, price_answer, product } = body
 
-  if (!nome || !whatsapp || !empresa || !product) {
+  if (!nome || !whatsapp || !company_size || !product) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 422 })
   }
 
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
   if (!apiUrl) {
     // Em dev sem configuração, simula sucesso
-    console.log('[waitlist] Lead recebido (sem DB configurado):', { nome, whatsapp, empresa, price_answer, product })
+    console.log('[waitlist] Lead recebido (sem DB configurado):', { nome, whatsapp, company_size, price_answer, product })
     return NextResponse.json({ ok: true, message: 'Lead registrado (modo dev)' })
   }
 
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
     body: JSON.stringify({
       nome,
       whatsapp,
-      empresa,
+      company_size,
       price_answer,
       product,
       created_at: new Date().toISOString(),
