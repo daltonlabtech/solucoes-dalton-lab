@@ -5,6 +5,7 @@ import {
   PATH_TO_LP,
   LP_TO_VARIANT_B_PATH,
   cookieName,
+  type Variant,
 } from '@/lib/experiments'
 
 export function proxy(request: NextRequest): NextResponse {
@@ -18,9 +19,9 @@ export function proxy(request: NextRequest): NextResponse {
 
   const cookie = cookieName(lp)
   const raw = request.cookies.get(cookie)?.value
-  const existing: 'control' | 'test' | undefined =
+  const existing: Variant | undefined =
     raw === 'control' || raw === 'test' ? raw : undefined
-  const variant: 'control' | 'test' = existing ?? (Math.random() < 0.5 ? 'control' : 'test')
+  const variant: Variant = existing ?? (Math.random() < 0.5 ? 'control' : 'test')
 
   // Rewrite to variant B or pass through to variant A
   const response =
@@ -42,6 +43,6 @@ export function proxy(request: NextRequest): NextResponse {
 }
 
 export const config = {
-  // Only run on LP paths — skip API routes, static files, _next
+  // Must be a static array — Next.js/Turbopack requires static matcher values
   matcher: ['/', '/radar', '/crm', '/propostas', '/sdr'],
 }

@@ -39,6 +39,9 @@ export const LP_TO_VARIANT_B_PATH: Record<string, string> = {
   sdr: '/sdr/variant-b',
 }
 
+/** Valid A/B variant values */
+export type Variant = 'control' | 'test'
+
 /** PostHog feature flag key for a given LP */
 export function flagKey(lp: string): string {
   return `${lp}-lp-test`
