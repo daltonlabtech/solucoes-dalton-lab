@@ -14,9 +14,9 @@ function getBootstrapFlags(pathname: string): Record<string, string> {
   const variant = document.cookie
     .split('; ')
     .find((c) => c.startsWith(`${name}=`))
-    ?.split('=')[1]
+    ?.slice(name.length + 1)
 
-  if (!variant) return {}
+  if (variant !== 'control' && variant !== 'test') return {}
   return { [flagKey(lp)]: variant }
 }
 
