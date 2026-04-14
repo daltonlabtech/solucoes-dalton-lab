@@ -17,7 +17,9 @@ export function middleware(request: NextRequest): NextResponse {
   }
 
   const cookie = cookieName(lp)
-  const existing = request.cookies.get(cookie)?.value as 'control' | 'test' | undefined
+  const raw = request.cookies.get(cookie)?.value
+  const existing: 'control' | 'test' | undefined =
+    raw === 'control' || raw === 'test' ? raw : undefined
   const variant: 'control' | 'test' = existing ?? (Math.random() < 0.5 ? 'control' : 'test')
 
   // Rewrite to variant B or pass through to variant A
@@ -32,6 +34,7 @@ export function middleware(request: NextRequest): NextResponse {
       httpOnly: false, // must be readable by PostHog bootstrap (client-side JS)
       sameSite: 'lax',
       path: '/',
+      secure: process.env.NODE_ENV === 'production',
     })
   }
 
