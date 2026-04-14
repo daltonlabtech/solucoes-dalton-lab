@@ -15,7 +15,7 @@
 | File | Action | Responsibility |
 |---|---|---|
 | `lib/experiments.ts` | CREATE | Config map — which LPs have active experiments |
-| `middleware.ts` | CREATE | Edge function — assigns variant, sets cookie, rewrites to variant-b |
+| `proxy.ts` | CREATE | Edge function — assigns variant, sets cookie, rewrites to variant-b (Next.js 16: `proxy.ts` replaces `middleware.ts`) |
 | `lib/posthog.ts` | MODIFY | Accept optional `bootstrap` param in `initPostHog` |
 | `components/PostHogProvider.tsx` | MODIFY | Read session cookie, pass bootstrap flags to `initPostHog` |
 
