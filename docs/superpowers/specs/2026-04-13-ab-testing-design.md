@@ -58,6 +58,8 @@ export const ACTIVE_EXPERIMENTS: Record<string, boolean> = {
 
 Ligar/desligar um experimento = mudar `false` para `true` + deploy. Sem dashboard externo, sem variável de ambiente separada.
 
+> ⚠️ **A flag só deve ser setada para `true` quando `variant-b/page.tsx` já existir.** Ativar o experimento sem a página da variante B causa 404 para 50% dos usuários. A ordem correta é sempre: criar a página → rodar Lighthouse → ativar a flag.
+
 ---
 
 ## Estrutura de Arquivos
