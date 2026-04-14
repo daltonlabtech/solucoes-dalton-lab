@@ -1,4 +1,4 @@
-// middleware.ts
+// proxy.ts
 import { NextRequest, NextResponse } from 'next/server'
 import {
   ACTIVE_EXPERIMENTS,
@@ -7,7 +7,7 @@ import {
   cookieName,
 } from '@/lib/experiments'
 
-export function middleware(request: NextRequest): NextResponse {
+export function proxy(request: NextRequest): NextResponse {
   const { pathname } = request.nextUrl
   const lp = PATH_TO_LP[pathname]
 
