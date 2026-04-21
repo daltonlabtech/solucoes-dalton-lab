@@ -19,11 +19,30 @@
   const headline = el('headline');
   tl.set(headline, { autoAlpha: 1 }, t.headline.start);
 
-  const rawHtml = headline.innerHTML;
-  const wrapped = rawHtml.replace(/(\S+)/g, (word) =>
-    `<span style="display:inline-block;overflow:hidden;vertical-align:bottom"><span class="tw-w" style="display:inline-block">${word}</span></span>`
-  );
-  headline.innerHTML = wrapped;
+  function wrapWords(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      if (!node.textContent.trim()) return;
+      const frag = document.createDocumentFragment();
+      node.textContent.split(/(\s+)/).forEach(part => {
+        if (/\s+/.test(part)) {
+          frag.appendChild(document.createTextNode(part));
+        } else if (part) {
+          const outer = document.createElement('span');
+          outer.style.cssText = 'display:inline-block;overflow:hidden;vertical-align:bottom';
+          const inner = document.createElement('span');
+          inner.className = 'tw-w';
+          inner.style.cssText = 'display:inline-block';
+          inner.textContent = part;
+          outer.appendChild(inner);
+          frag.appendChild(outer);
+        }
+      });
+      node.parentNode.replaceChild(frag, node);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      Array.from(node.childNodes).forEach(wrapWords);
+    }
+  }
+  wrapWords(headline);
 
   tl.fromTo(headline.querySelectorAll('.tw-w'),
     { y: '105%' },
