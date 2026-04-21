@@ -84,6 +84,8 @@ function buildPillsHtml(pills) {
   return pills.map(p => `<div class="pill">${p}</div>`).join('\n        ')
 }
 
+mkdirSync(join(ROOT, 'compositions'), { recursive: true })
+
 let count = 0
 
 for (const config of configs) {
