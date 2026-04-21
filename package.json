@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prebuild": "node ads/hyperframes/scripts/generate.js",
     "start": "next start",
     "lint": "eslint"
   },

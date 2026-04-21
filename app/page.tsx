@@ -1,4 +1,3 @@
-// app/page.tsx
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Check } from 'lucide-react'
@@ -61,7 +60,7 @@ export default function HubPage() {
             Você toca tudo na empresa.{' '}
             <span className="gradient-text">Deixa o trabalho pesado com a gente.</span>
           </h1>
-          <p className="text-lg md:text-xl text-slate-400 max-w-2xl leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-200 max-w-2xl leading-relaxed">
             Ferramentas que você liga em horas, não meses. Sem contratar, sem configurar do zero. Se não entregar resultado, você cancela — sem multa.
           </p>
           <Button size="lg" asChild>
@@ -88,7 +87,7 @@ export default function HubPage() {
                 </span>
               </div>
               <p className="text-slate-300 leading-relaxed text-lg">{featuredProduct.tagline}</p>
-              <p className="text-slate-500 text-sm">{featuredProduct.metric} · {featuredProduct.price}</p>
+              <p className="text-slate-300 text-sm">{featuredProduct.metric} · {featuredProduct.price}</p>
             </div>
 
             <div className="flex-shrink-0">
@@ -114,14 +113,14 @@ export default function HubPage() {
                   </span>
                 </div>
 
-                <p className="text-slate-400 text-sm leading-relaxed">{p.tagline}</p>
+                <p className="text-slate-200 text-sm leading-relaxed">{p.tagline}</p>
 
-                <p className="text-xs text-slate-500 italic border-l-2 border-dalton-cyan/40 pl-3 leading-relaxed">
+                <p className="text-xs text-slate-300 italic border-l-2 border-dalton-cyan/40 pl-3 leading-relaxed">
                   {p.painStat}
                 </p>
 
                 <div className="flex items-center justify-between mt-auto pt-2">
-                  <p className="text-slate-500 text-xs">{p.price}</p>
+                  <p className="text-slate-300 text-xs">{p.price}</p>
                   <Link
                     href={p.href}
                     className="inline-flex items-center gap-1.5 text-dalton-cyan text-sm font-semibold hover:gap-2.5 transition-all duration-150 focus-visible:outline-none focus-visible:underline"
@@ -139,7 +138,7 @@ export default function HubPage() {
       <section className="py-12 px-6">
         <div className="max-w-3xl mx-auto">
           <div className="h-px bg-gradient-to-r from-transparent via-dalton-cyan/30 to-transparent mb-12" />
-          <p className="text-slate-400 text-lg leading-relaxed text-center">
+          <p className="text-slate-200 text-lg leading-relaxed text-center">
             Mais de <span className="text-white font-bold">3 milhões de visualizações</span> já rastreadas pelo Radar. Cada ferramenta que lançamos resolve um problema específico — com dado, não com promessa.
           </p>
         </div>
@@ -148,7 +147,7 @@ export default function HubPage() {
       {/* Confiança */}
       <section className="py-16 px-6 bg-[#0c1e35]">
         <div className="max-w-3xl mx-auto text-center flex flex-col items-center gap-6">
-          <p className="text-slate-400 text-lg leading-relaxed">
+          <p className="text-slate-200 text-lg leading-relaxed">
             Cada ferramenta foi construída para resolver um problema específico — com dado real, não com lista de funcionalidades.{' '}
             <span className="text-white font-medium">Se não funcionar no seu negócio, você cancela. Sem multa, sem fidelidade.</span>
           </p>

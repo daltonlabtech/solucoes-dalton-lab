@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      background: #0a1628;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #stage {
+      width: 1080px;
+      height: 1920px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px;
+    }
+
+    /* Glow */
+    .glow {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(140px);
+    }
+    #glow-main {
+      width: 900px;
+      height: 900px;
+      background: {{glowColor}};
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Logo */
+    #logo {
+      position: absolute;
+      top: 80px;
+      right: 80px;
+      height: 32px;
+      opacity: 0;
+      object-fit: contain;
+    }
+
+    /* Content block — centered column */
+    #content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+      padding-bottom: 240px;
+    }
+
+    /* Eyebrow */
+    #eyebrow {
+      display: inline-flex;
+      align-items: center;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: {{accentColor}};
+      border: 1px solid color-mix(in srgb, {{accentColor}} 35%, transparent);
+      background: color-mix(in srgb, {{accentColor}} 10%, transparent);
+      padding: 10px 28px;
+      border-radius: 100px;
+      margin-bottom: 52px;
+      opacity: 0;
+    }
+
+    /* Headline */
+    #headline {
+      font-size: 96px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      white-space: pre-line;
+      text-align: center;
+      margin-bottom: 36px;
+      opacity: 0;
+    }
+
+    #headline .accent {
+      background: linear-gradient(135deg, {{accentColor}}, #ffffff 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    #headline .strikethrough {
+      color: #64748b;
+      -webkit-text-fill-color: #64748b;
+      text-decoration: line-through;
+      text-decoration-thickness: 4px;
+      text-decoration-color: {{accentColor}};
+    }
+
+    /* Divider */
+    #divider {
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, {{accentColor}}, rgba(0,255,255,0.4), transparent);
+      margin-bottom: 36px;
+      opacity: 0;
+    }
+
+    <!-- IF:pills -->
+    /* Pills */
+    #pills {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 40px;
+      opacity: 0;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px;
+      padding: 14px 28px;
+      font-size: 28px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+    }
+    .pill::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: {{accentColor}};
+      flex-shrink: 0;
+    }
+    <!-- ENDIF:pills -->
+
+    /* Subline */
+    #subline {
+      font-size: 34px;
+      font-weight: 300;
+      color: #94a3b8;
+      line-height: 1.55;
+      text-align: center;
+      max-width: 820px;
+      margin-bottom: 52px;
+      opacity: 0;
+    }
+    #subline .accent {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* CTA */
+    #cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, {{accentColor}}, color-mix(in srgb, {{accentColor}} 60%, #000));
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      padding: 22px 52px;
+      border-radius: 14px;
+      box-shadow: 0 8px 40px color-mix(in srgb, {{accentColor}} 40%, transparent);
+      text-decoration: none;
+      opacity: 0;
+    }
+
+    <!-- IF:grid -->
+    /* Product grid */
+    #grid {
+      position: absolute;
+      bottom: 0;
+      left: 80px;
+      right: 80px;
+      padding-bottom: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      opacity: 0;
+    }
+    .grid-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 26px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .grid-card .card-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .grid-card .card-desc {
+      font-size: 18px;
+      font-weight: 400;
+      color: #64748b;
+      line-height: 1.4;
+    }
+    .grid-card.radar       { border-top: 2px solid #7c3aed; }
+    .grid-card.sdr         { border-top: 2px solid #10b981; }
+    .grid-card.propostas   { border-top: 2px solid #3b82f6; }
+    .grid-card.transcricao { border-top: 2px solid #f59e0b; }
+    <!-- ENDIF:grid -->
+  </style>
+</head>
+<body>
+  <div id="stage"
+    data-composition-id="{{compositionId}}"
+    data-width="1080"
+    data-height="1920"
+    data-duration="{{durationSeconds}}">
+
+    <div class="glow" id="glow-main"></div>
+
+    <img id="logo"
+      data-start="0" data-duration="{{durationSeconds}}" data-track-index="1"
+      src="../src/assets/logo.png" alt="Dalton Lab" />
+
+    <div id="content">
+      <span id="eyebrow"
+        data-start="0" data-duration="{{durationSeconds}}" data-track-index="2">{{eyebrow}}</span>
+
+      <h1 id="headline"
+        data-start="0" data-duration="{{durationSeconds}}" data-track-index="3">{{headlineHtml}}</h1>
+
+      <div id="divider"
+        data-start="0" data-duration="{{durationSeconds}}" data-track-index="4"></div>
+
+      <!-- IF:pills -->
+      <div id="pills"
+        data-start="0" data-duration="{{durationSeconds}}" data-track-index="5">
+        {{pillsHtml}}
+      </div>
+      <!-- ENDIF:pills -->
+
+      <p id="subline"
+        data-start="0" data-duration="{{durationSeconds}}" data-track-index="6">{{sublineHtml}}</p>
+
+      <a id="cta"
+        data-start="0" data-duration="{{durationSeconds}}" data-track-index="7">{{cta}}</a>
+    </div>
+
+    <!-- IF:grid -->
+    <div id="grid"
+      data-start="0" data-duration="{{durationSeconds}}" data-track-index="8">
+      <div class="grid-card radar">
+        <span class="card-name">Radar</span>
+        <span class="card-desc">Rastreamento de visitantes</span>
+      </div>
+      <div class="grid-card sdr">
+        <span class="card-name">SDR IA</span>
+        <span class="card-desc">WhatsApp 24h automático</span>
+      </div>
+      <div class="grid-card propostas">
+        <span class="card-name">Propostas</span>
+        <span class="card-desc">Do CRM ao PDF em 1 min</span>
+      </div>
+      <div class="grid-card transcricao">
+        <span class="card-name">Transcrição</span>
+        <span class="card-desc">Reuniões resumidas com IA</span>
+      </div>
+    </div>
+    <!-- ENDIF:grid -->
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    window.TIMING = {{timingJson}};
+    window.AD_CONFIG = {{configJson}};
+  </script>
+  <script>
+    {{animationScript}}
+  </script>
+</body>
+</html>

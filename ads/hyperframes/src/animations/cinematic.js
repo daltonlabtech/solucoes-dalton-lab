@@ -1,0 +1,79 @@
+(function () {
+  const t = window.TIMING;
+  const totalDuration = t.duration;
+  const tl = gsap.timeline({ defaults: { ease: 'power1.inOut' } });
+  const el = (id) => document.getElementById(id);
+  const has = (id) => !!el(id);
+
+  tl.fromTo(document.getElementById('stage'),
+    { scale: 1.07 },
+    { scale: 1.0, duration: totalDuration, ease: 'none' },
+    0
+  );
+
+  tl.fromTo(el('glow-main'),
+    { opacity: 0 },
+    { opacity: 1, duration: totalDuration * 0.4, ease: 'none' },
+    0
+  );
+
+  tl.fromTo(el('logo'),
+    { autoAlpha: 0 },
+    { autoAlpha: 0.35, duration: 1.0 },
+    t.logo.start
+  );
+
+  tl.fromTo(el('eyebrow'),
+    { autoAlpha: 0, y: 16 },
+    { autoAlpha: 1, y: 0, duration: 0.8 },
+    t.eyebrow.start
+  );
+
+  tl.fromTo(el('headline'),
+    { autoAlpha: 0, scale: 0.96, transformOrigin: 'center center' },
+    { autoAlpha: 1, scale: 1, duration: 1.0 },
+    t.headline.start
+  );
+
+  tl.fromTo(el('divider'),
+    { autoAlpha: 0, scaleX: 0, transformOrigin: 'center center' },
+    { autoAlpha: 1, scaleX: 1, duration: 0.7 },
+    t.divider.start
+  );
+
+  if (has('pills')) {
+    tl.fromTo(el('pills'),
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.7 },
+      t.pills.start
+    );
+  }
+
+  tl.fromTo(el('subline'),
+    { autoAlpha: 0, y: 20 },
+    { autoAlpha: 1, y: 0, duration: 0.8 },
+    t.subline.start
+  );
+
+  if (has('grid')) {
+    tl.fromTo(el('grid').children,
+      { autoAlpha: 0, y: 24 },
+      { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.12 },
+      t.grid.start
+    );
+  }
+
+  tl.fromTo(el('cta'),
+    { autoAlpha: 0, y: 24 },
+    { autoAlpha: 1, y: 0, duration: 0.8 },
+    t.cta.start
+  );
+
+  tl.to(el('cta'), {
+    scale: 1.04,
+    duration: 1.4,
+    repeat: -1,
+    yoyo: true,
+    ease: 'sine.inOut',
+  }, t.cta.start + 1.0);
+}());
