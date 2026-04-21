@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, copyFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -243,3 +243,34 @@ ${adSections.map(({ config, cards }) => `
 
 writeFileSync(join(ROOT, 'viewer.html'), viewerHtml, 'utf8')
 console.log('✓ Generated viewer.html')
+
+// Mirror to public/ads/ for Next.js /preview/ads route
+const PUBLIC_COMPS  = join(ROOT, '../../public/ads/compositions')
+const PUBLIC_STATIC = join(ROOT, '../../public/ads/static')
+mkdirSync(PUBLIC_COMPS,  { recursive: true })
+mkdirSync(PUBLIC_STATIC, { recursive: true })
+
+for (const config of configs) {
+  for (const durationKey of DURATIONS) {
+    for (const style of STYLES) {
+      const filename = `${config.id}-${style}-${durationKey}.html`
+      const src = readFileSync(join(ROOT, 'compositions', filename), 'utf8')
+      const out = src.replaceAll('src="../src/assets/logo.png"', 'src="/logo.png"')
+      if (out === src) throw new Error(`${filename}: logo path replacement not found`)
+      writeFileSync(join(PUBLIC_COMPS, filename), out, 'utf8')
+    }
+  }
+}
+
+const STATIC_SRC  = join(ROOT, '../../ads')
+const staticHtmls = readdirSync(STATIC_SRC).filter(f => f.endsWith('.html') && f.startsWith('ad-'))
+for (const f of staticHtmls) {
+  const src = readFileSync(join(STATIC_SRC, f), 'utf8')
+  const out = src
+    .replaceAll('href="base.css"',          'href="/ads/static/base.css"')
+    .replaceAll('src="../public/logo.png"', 'src="/logo.png"')
+  if (out === src) throw new Error(`${f}: expected path replacements not found — check source HTML`)
+  writeFileSync(join(PUBLIC_STATIC, f), out, 'utf8')
+}
+copyFileSync(join(STATIC_SRC, 'base.css'), join(PUBLIC_STATIC, 'base.css'))
+console.log('✓ Mirrored to public/ads/')
