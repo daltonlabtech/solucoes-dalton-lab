@@ -39,6 +39,17 @@
       });
       node.parentNode.replaceChild(frag, node);
     } else if (node.nodeType === Node.ELEMENT_NODE) {
+      if (node.classList && (node.classList.contains('accent') || node.classList.contains('strikethrough'))) {
+        const outer = document.createElement('span');
+        outer.style.cssText = 'display:inline-block;overflow:hidden;vertical-align:bottom';
+        const inner = document.createElement('span');
+        inner.className = 'tw-w';
+        inner.style.cssText = 'display:inline-block';
+        node.parentNode.replaceChild(outer, node);
+        inner.appendChild(node);
+        outer.appendChild(inner);
+        return;
+      }
       Array.from(node.childNodes).forEach(wrapWords);
     }
   }
