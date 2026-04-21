@@ -1,0 +1,11 @@
+{
+  "name": "daltonlab-hyperframes-ads",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "generate": "node scripts/generate.js",
+    "preview": "npx hyperframes preview",
+    "render:all": "node scripts/render-all.js",
+    "test": "node --test tests/generate.test.js"
+  }
+}
