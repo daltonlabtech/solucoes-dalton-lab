@@ -134,6 +134,10 @@ const adSections = configs.map(config => {
   return { config, cards }
 })
 
+const SCALE = 0.25
+const PW = Math.round(1080 * SCALE)
+const PH = Math.round(1920 * SCALE)
+
 const viewerHtml = `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -142,39 +146,98 @@ const viewerHtml = `<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
-    body{background:#0a1628;color:#e2e8f0;font-family:'Plus Jakarta Sans',sans-serif;padding:48px 40px;min-height:100vh}
-    h1{font-size:22px;font-weight:800;letter-spacing:.04em;color:#fff;margin-bottom:8px}
+    body{background:#0a1628;color:#e2e8f0;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh}
+    .layout{display:grid;grid-template-columns:1fr ${PW + 32}px;gap:0;min-height:100vh}
+
+    /* left: ad list */
+    .list{padding:48px 40px;overflow-y:auto}
+    h1{font-size:22px;font-weight:800;letter-spacing:.04em;color:#fff;margin-bottom:6px}
     .subtitle{font-size:13px;color:#475569;margin-bottom:48px}
-    .ad-section{margin-bottom:40px}
-    .ad-header{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
-    .ad-id{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#475569}
-    .ad-headline{font-size:15px;font-weight:700;color:#cbd5e1}
-    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .ad-section{margin-bottom:36px}
+    .ad-header{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
+    .ad-id{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#334155}
+    .ad-headline{font-size:14px;font-weight:700;color:#94a3b8}
+    .chips{display:flex;flex-wrap:wrap;gap:7px}
     .chip{
       display:inline-flex;align-items:center;gap:6px;
-      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
-      border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;
-      color:#94a3b8;cursor:pointer;text-decoration:none;transition:all .15s;
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+      border-radius:8px;padding:6px 13px;font-size:12px;font-weight:600;
+      color:#64748b;cursor:pointer;text-decoration:none;transition:all .15s;user-select:none;
     }
-    .chip:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.18);color:#fff}
+    .chip:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);color:#cbd5e1}
+    .chip.active{background:color-mix(in srgb,var(--accent) 14%,transparent);border-color:color-mix(in srgb,var(--accent) 50%,transparent);color:#fff}
     .chip .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
-    hr{border:none;border-top:1px solid rgba(255,255,255,.06);margin-bottom:40px}
+    hr{border:none;border-top:1px solid rgba(255,255,255,.05);margin-bottom:36px}
+
+    /* right: sticky preview */
+    .sidebar{
+      border-left:1px solid rgba(255,255,255,.06);
+      padding:48px 16px;
+      position:sticky;top:0;height:100vh;
+      display:flex;flex-direction:column;align-items:center;gap:16px;
+    }
+    .preview-shell{
+      width:${PW}px;height:${PH}px;
+      border-radius:12px;overflow:hidden;
+      background:#060e1c;
+      border:1px solid rgba(255,255,255,.08);
+      position:relative;flex-shrink:0;
+    }
+    .preview-shell iframe{
+      width:1080px;height:1920px;
+      transform:scale(${SCALE});transform-origin:top left;
+      border:none;display:block;
+    }
+    .empty-state{
+      position:absolute;inset:0;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:8px;
+      color:#1e293b;font-size:13px;font-weight:600;text-align:center;
+    }
+    .empty-icon{font-size:28px;opacity:.4}
+    .preview-label{font-size:11px;color:#334155;font-weight:600;letter-spacing:.08em;text-align:center;line-height:1.6}
   </style>
 </head>
 <body>
-  <h1>Dalton Lab — Ads Viewer</h1>
-  <p class="subtitle">45 compositions · 5 ads × 3 estilos × 3 durações</p>
+  <div class="layout">
+    <div class="list">
+      <h1>Dalton Lab — Ads Viewer</h1>
+      <p class="subtitle">45 compositions · 5 ads × 3 estilos × 3 durações</p>
 ${adSections.map(({ config, cards }) => `
-  <div class="ad-section">
-    <div class="ad-header">
-      <span class="ad-id">${config.id}</span>
-      <span class="ad-headline">${config.headline.replace(/\n/g, ' ')}</span>
+      <div class="ad-section">
+        <div class="ad-header">
+          <span class="ad-id">${config.id}</span>
+          <span class="ad-headline">${config.headline.replace(/\n/g, ' ')}</span>
+        </div>
+        <div class="chips">
+          ${cards.map(c => `<span class="chip" onclick="preview(this,'${c.file}','${c.label}')" style="--accent:${config.accentColor}"><span class="dot"></span>${c.label}</span>`).join('\n          ')}
+        </div>
+      </div>
+      <hr/>`).join('')}
     </div>
-    <div class="chips">
-      ${cards.map(c => `<a class="chip" href="${c.file}" target="_blank" style="--accent:${config.accentColor}"><span class="dot"></span>${c.label}</a>`).join('\n      ')}
+
+    <div class="sidebar">
+      <div class="preview-shell" id="shell">
+        <div class="empty-state" id="empty">
+          <span class="empty-icon">▶</span>
+          Selecione um ad
+        </div>
+        <iframe id="frame" style="display:none"></iframe>
+      </div>
+      <div class="preview-label" id="label"></div>
     </div>
   </div>
-  <hr/>`).join('')}
+
+  <script>
+    function preview(chip, file, label) {
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'))
+      chip.classList.add('active')
+      const frame = document.getElementById('frame')
+      frame.src = file
+      frame.style.display = 'block'
+      document.getElementById('empty').style.display = 'none'
+      document.getElementById('label').textContent = label
+    }
+  </script>
 </body>
 </html>`
 
