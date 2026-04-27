@@ -11,6 +11,7 @@ const links = [
   { href: '/propostas', label: 'Gerador de Propostas' },
   { href: '/crm', label: 'Reuniões → CRM' },
   { href: '/radar', label: 'Radar' },
+  { href: '/linkedin', label: 'Linkedin Post' },
 ]
 
 export function Navbar() {

@@ -8,14 +8,26 @@ export const metadata: Metadata = {
   description: 'Ferramentas prontas para usar que resolvem o que toma mais tempo na sua empresa. Sem contratar, sem configurar do zero.',
 }
 
-const featuredProduct = {
-  href: '/radar',
-  name: 'Radar',
-  tagline: 'Veja exatamente o que funciona no seu Instagram — e pare de postar no escuro.',
-  metric: '3M+ visualizações rastreadas',
-  price: 'R$ 297/mês',
-  cta: 'Assinar agora',
-}
+const availableProducts = [
+  {
+    href: '/radar',
+    name: 'Radar',
+    tagline: 'Veja exatamente o que funciona no seu Instagram — e pare de postar no escuro.',
+    metric: '3M+ visualizações rastreadas',
+    price: 'R$ 297/mês',
+    cta: 'Assinar agora',
+    badge: true,
+  },
+  {
+    href: '/linkedin',
+    name: 'Linkedin Post',
+    tagline: 'Crie posts alinhados à voz da sua empresa e publique direto no LinkedIn com um clique.',
+    metric: '100 posts por mês · 2 min do briefing ao post',
+    price: 'R$ 99/mês',
+    cta: 'Quero acesso antecipado',
+    badge: false,
+  },
+]
 
 const comingSoonProducts = [
   {
@@ -74,30 +86,33 @@ export default function HubPage() {
         <div className="max-w-6xl mx-auto flex flex-col gap-6">
           <h2 id="produtos-title" className="sr-only">Soluções Dalton Lab</h2>
 
-          {/* Radar — produto disponível */}
-          <article className="relative bg-white/5 rounded-2xl p-8 flex flex-col md:flex-row md:items-center gap-6 border border-white/10 overflow-hidden hover:border-dalton-cyan/30 transition-all duration-200">
-            {/* Accent top line */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-cyan-purple" aria-hidden="true" />
+          {/* Produtos disponíveis */}
+          {availableProducts.map(p => (
+            <article key={p.href} className="relative bg-white/5 rounded-2xl p-8 flex flex-col md:flex-row md:items-center gap-6 border border-white/10 overflow-hidden hover:border-dalton-cyan/30 transition-all duration-200">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-cyan-purple" aria-hidden="true" />
 
-            <div className="flex-1 flex flex-col gap-3 mt-1">
-              <div className="flex items-center gap-3">
-                <h3 className="text-2xl font-black text-white">{featuredProduct.name}</h3>
-                <span className="text-xs font-bold uppercase tracking-widest text-green-400 bg-green-400/10 border border-green-400/20 px-3 py-1 rounded-full">
-                  Disponível agora
-                </span>
+              <div className="flex-1 flex flex-col gap-3 mt-1">
+                <div className="flex items-center gap-3">
+                  <h3 className="text-2xl font-black text-white">{p.name}</h3>
+                  {p.badge && (
+                    <span className="text-xs font-bold uppercase tracking-widest text-green-400 bg-green-400/10 border border-green-400/20 px-3 py-1 rounded-full">
+                      Disponível agora
+                    </span>
+                  )}
+                </div>
+                <p className="text-slate-300 leading-relaxed text-lg">{p.tagline}</p>
+                <p className="text-slate-300 text-sm">{p.metric} · {p.price}</p>
               </div>
-              <p className="text-slate-300 leading-relaxed text-lg">{featuredProduct.tagline}</p>
-              <p className="text-slate-300 text-sm">{featuredProduct.metric} · {featuredProduct.price}</p>
-            </div>
 
-            <div className="flex-shrink-0">
-              <Link href={featuredProduct.href}>
-                <Button size="lg">
-                  {featuredProduct.cta} <ArrowRight size={16} className="ml-1" aria-hidden="true" />
-                </Button>
-              </Link>
-            </div>
-          </article>
+              <div className="flex-shrink-0">
+                <Link href={p.href}>
+                  <Button size="lg">
+                    {p.cta} <ArrowRight size={16} className="ml-1" aria-hidden="true" />
+                  </Button>
+                </Link>
+              </div>
+            </article>
+          ))}
 
           {/* Acesso antecipado */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
