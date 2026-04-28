@@ -1,12 +1,12 @@
-// app/api/waitlist/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 
 interface WaitlistPayload {
-  nome: string
+  nome?: string
   whatsapp: string
-  company_size: '1-5' | '6-20' | '21-100' | '100+'
-  price_answer: 'sim' | 'conversa' | 'nao'
+  company_size?: '1-5' | '6-20' | '21-100' | '100+'
+  price_answer?: 'sim' | 'conversa' | 'nao'
   product: string
+  variant?: 'control' | 'popup'
 }
 
 export async function POST(req: NextRequest) {
@@ -18,9 +18,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  const { nome, whatsapp, company_size, price_answer, product } = body
+  const { nome, whatsapp, company_size, price_answer, product, variant } = body
 
-  if (!nome || !whatsapp || !company_size || !product) {
+  if (!whatsapp || !product) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 422 })
   }
 
@@ -28,8 +28,7 @@ export async function POST(req: NextRequest) {
   const apiKey = process.env.WAITLIST_API_KEY
 
   if (!apiUrl) {
-    // Em dev sem configuração, simula sucesso
-    console.log('[waitlist] Lead recebido (sem DB configurado):', { nome, whatsapp, company_size, price_answer, product })
+    console.log('[waitlist] Lead recebido (sem DB configurado):', { nome, whatsapp, company_size, price_answer, product, variant })
     return NextResponse.json({ ok: true, message: 'Lead registrado (modo dev)' })
   }
 
@@ -40,11 +39,12 @@ export async function POST(req: NextRequest) {
       ...(apiKey ? { 'Authorization': `Bearer ${apiKey}` } : {}),
     },
     body: JSON.stringify({
-      nome,
+      nome: nome ?? '',
       whatsapp,
-      company_size,
-      price_answer,
+      company_size: company_size ?? 'unknown',
+      price_answer: price_answer ?? null,
       product,
+      variant: variant ?? 'control',
       created_at: new Date().toISOString(),
       source: 'solucoes.daltonlab.ai',
     }),
