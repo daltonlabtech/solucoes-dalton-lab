@@ -1,11 +1,10 @@
-// components/layout/Navbar.tsx
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { posthog } from '@/lib/posthog'
+import { posthog, AB_WAITLIST_FLAG } from '@/lib/posthog'
 
 const waitlistLinks = [
   { href: '/sdr', popup: '/?produto=sdr', label: 'SDR WhatsApp' },
@@ -23,9 +22,10 @@ export function Navbar() {
   const [isPopupVariant, setIsPopupVariant] = useState(false)
 
   useEffect(() => {
-    posthog.onFeatureFlags(() => {
-      setIsPopupVariant(posthog.getFeatureFlag('ab_waitlist_popup_v1') === 'popup')
+    const unsubscribe = posthog.onFeatureFlags(() => {
+      setIsPopupVariant(posthog.getFeatureFlag(AB_WAITLIST_FLAG) === 'popup')
     })
+    return () => unsubscribe?.()
   }, [])
 
   const links = [

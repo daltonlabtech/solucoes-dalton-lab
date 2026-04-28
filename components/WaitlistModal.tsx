@@ -1,9 +1,9 @@
-// components/WaitlistModal.tsx
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import { X } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { posthog } from '@/lib/posthog'
+import { formatWhatsApp } from '@/lib/formatWhatsApp'
 
 interface WaitlistModalProps {
   isOpen: boolean
@@ -12,14 +12,6 @@ interface WaitlistModalProps {
   productLabel: string
   modalTitle?: string
   ctaLabel?: string
-}
-
-function formatWhatsApp(value: string): string {
-  const digits = value.replace(/\D/g, '').slice(0, 11)
-  if (digits.length <= 2) return digits.length ? `(${digits}` : ''
-  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`
-  if (digits.length <= 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`
-  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`
 }
 
 export function WaitlistModal({ isOpen, onClose, product, productLabel, modalTitle = 'Garantir meu lugar', ctaLabel = 'Garantir meu lugar →' }: WaitlistModalProps) {
@@ -54,6 +46,7 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, modalTit
     if (!success) {
       posthog.capture('waitlist_modal_abandoned', {
         product,
+        variant: 'control',
         source_page: window.location.pathname,
       })
     }

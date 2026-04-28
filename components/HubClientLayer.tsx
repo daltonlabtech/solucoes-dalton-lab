@@ -3,7 +3,7 @@ import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { posthog } from '@/lib/posthog'
+import { posthog, AB_WAITLIST_FLAG } from '@/lib/posthog'
 import { EarlyAccessPopup } from '@/components/EarlyAccessPopup'
 
 const POPUP_PRODUCTS = {
@@ -40,8 +40,8 @@ function HubClientLayerInner({ products }: { products: ComingSoonProduct[] }) {
   const [isPopupVariant, setIsPopupVariant] = useState(false)
 
   useEffect(() => {
-    posthog.onFeatureFlags(() => {
-      const flag = posthog.getFeatureFlag('ab_waitlist_popup_v1')
+    const unsubscribe = posthog.onFeatureFlags(() => {
+      const flag = posthog.getFeatureFlag(AB_WAITLIST_FLAG)
       const isPopup = flag === 'popup'
       setIsPopupVariant(isPopup)
 
@@ -52,13 +52,13 @@ function HubClientLayerInner({ products }: { products: ComingSoonProduct[] }) {
         }
       }
     })
+    return () => unsubscribe?.()
   }, [searchParams])
 
   const activeProduct = openProduct ? POPUP_PRODUCTS[openProduct] : null
 
   return (
     <>
-      {/* Mobile: carrossel horizontal com peek. Desktop: grid 3-col */}
       <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth -mx-6 px-6 pr-6 pb-2 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-3 md:overflow-visible">
         {products.map(p => {
           const productKey = p.href.replace('/', '') as ProductKey
