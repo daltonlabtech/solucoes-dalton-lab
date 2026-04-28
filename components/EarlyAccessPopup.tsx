@@ -49,6 +49,17 @@ export function EarlyAccessPopup({ isOpen, onClose, product, productLabel, headl
     return () => window.removeEventListener('keydown', handler)
   }, [onClose])
 
+  function handleClose() {
+    if (!success) {
+      posthog.capture('waitlist_modal_abandoned', {
+        product,
+        variant: 'popup',
+        source_page: window.location.pathname,
+      })
+    }
+    onClose()
+  }
+
   if (!isOpen) return null
 
   async function handleSubmit(e: React.FormEvent) {
@@ -88,12 +99,12 @@ export function EarlyAccessPopup({ isOpen, onClose, product, productLabel, headl
     >
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
+        onClick={handleClose}
         aria-hidden="true"
       />
       <div className="relative w-full max-w-sm glass-card p-8 shadow-2xl border border-dalton-cyan/20">
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-4 right-4 text-dalton-gray-mid hover:text-white transition-colors p-1 rounded focus-visible:ring-2 focus-visible:ring-dalton-cyan"
           aria-label="Fechar"
         >
