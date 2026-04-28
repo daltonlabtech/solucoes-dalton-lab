@@ -2,20 +2,36 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { posthog } from '@/lib/posthog'
 
-const links = [
-  { href: '/sdr', label: 'SDR WhatsApp' },
-  { href: '/propostas', label: 'Gerador de Propostas' },
-  { href: '/crm', label: 'Reuniões → CRM' },
+const waitlistLinks = [
+  { href: '/sdr', popup: '/?produto=sdr', label: 'SDR WhatsApp' },
+  { href: '/propostas', popup: '/?produto=propostas', label: 'Gerador de Propostas' },
+  { href: '/crm', popup: '/?produto=crm', label: 'Reuniões → CRM' },
+]
+
+const staticLinks = [
   { href: '/radar', label: 'Radar' },
   { href: '/linkedin', label: 'Linkedin Post' },
 ]
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+  const [isPopupVariant, setIsPopupVariant] = useState(false)
+
+  useEffect(() => {
+    posthog.onFeatureFlags(() => {
+      setIsPopupVariant(posthog.getFeatureFlag('ab_waitlist_popup_v1') === 'popup')
+    })
+  }, [])
+
+  const links = [
+    ...waitlistLinks.map(l => ({ href: isPopupVariant ? l.popup : l.href, label: l.label })),
+    ...staticLinks,
+  ]
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-dalton-bg/80 backdrop-blur-lg">

@@ -36,7 +36,7 @@ const comingSoonProducts = [
     name: 'SDR WhatsApp',
     tagline: 'Seu WhatsApp atende, classifica e responde seus leads — mesmo quando você não está.',
     painStat: 'Lead sem resposta em 5 min tem 10× menos chance de fechar.',
-    price: 'R$ 297/mês no lançamento',
+
     cta: 'Garantir meu lugar',
   },
   {
@@ -44,7 +44,7 @@ const comingSoonProducts = [
     name: 'Gerador de Propostas',
     tagline: 'Do CRM para a proposta pronta em menos de 1 minuto — sem abrir o PowerPoint.',
     painStat: '41h por mês perdidas em proposta manual — por vendedor.',
-    price: 'R$ 297/mês no lançamento',
+
     cta: 'Garantir meu lugar',
   },
   {
@@ -52,7 +52,7 @@ const comingSoonProducts = [
     name: 'Transcrição + CRM',
     tagline: 'Cada reunião vira resumo e tarefa no CRM automaticamente — sem você digitar nada.',
     painStat: '100% das notas de reunião criadas sem integração ao CRM.',
-    price: 'R$ 297/mês no lançamento',
+
     cta: 'Garantir meu lugar',
   },
 ]

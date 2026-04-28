@@ -31,7 +31,6 @@ interface ComingSoonProduct {
   name: string
   tagline: string
   painStat: string
-  price: string
   cta: string
 }
 
@@ -78,7 +77,6 @@ function HubClientLayerInner({ products }: { products: ComingSoonProduct[] }) {
                 {p.painStat}
               </p>
               <div className="flex items-center justify-between mt-auto pt-2">
-                <p className="text-slate-300 text-xs">{p.price}</p>
                 {isPopupVariant ? (
                   <button
                     onClick={() => setOpenProduct(productKey)}
