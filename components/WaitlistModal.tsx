@@ -4,6 +4,7 @@ import { X } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { posthog } from '@/lib/posthog'
 import { formatWhatsApp } from '@/lib/formatWhatsApp'
+import { whatsappInputClass } from '@/lib/utils'
 
 interface WaitlistModalProps {
   isOpen: boolean
@@ -84,8 +85,6 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, modalTit
     }
   }
 
-  const inputClass = 'w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-dalton-gray-mid focus:outline-none focus:border-dalton-cyan/50 transition-colors'
-
   return (
     <div
       role="dialog"
@@ -137,7 +136,7 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, modalTit
                   inputMode="numeric"
                   value={whatsapp}
                   onChange={e => setWhatsapp(formatWhatsApp(e.target.value))}
-                  className={inputClass}
+                  className={whatsappInputClass}
                   placeholder="(11) 99999-9999"
                 />
               </div>
