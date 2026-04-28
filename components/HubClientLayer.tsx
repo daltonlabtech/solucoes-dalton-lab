@@ -58,14 +58,12 @@ function HubClientLayerInner({ products }: { products: ComingSoonProduct[] }) {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* Mobile: carrossel horizontal com peek. Desktop: grid 3-col */}
+      <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth -mx-6 px-6 pr-6 pb-2 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-3 md:overflow-visible">
         {products.map(p => {
           const productKey = p.href.replace('/', '') as ProductKey
-          return (
-            <article
-              key={p.href}
-              className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col gap-3 hover:border-dalton-cyan/30 transition-all duration-200"
-            >
+          const cardContent = (
+            <article className="relative bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col gap-3 hover:border-dalton-cyan/30 transition-all duration-200 cursor-pointer h-full">
               <div className="flex items-center justify-between gap-2">
                 <h3 className="text-base font-black text-white">{p.name}</h3>
                 <span className="text-xs font-bold uppercase tracking-widest text-dalton-cyan bg-dalton-cyan/10 border border-dalton-cyan/25 px-2.5 py-1 rounded-full whitespace-nowrap">
@@ -76,24 +74,37 @@ function HubClientLayerInner({ products }: { products: ComingSoonProduct[] }) {
               <p className="text-xs text-slate-300 italic border-l-2 border-dalton-cyan/40 pl-3 leading-relaxed">
                 {p.painStat}
               </p>
-              <div className="flex items-center justify-between mt-auto pt-2">
-                {isPopupVariant ? (
-                  <button
-                    onClick={() => setOpenProduct(productKey)}
-                    className="inline-flex items-center gap-1.5 text-dalton-cyan text-sm font-semibold hover:gap-2.5 transition-all duration-150 focus-visible:outline-none focus-visible:underline"
-                  >
-                    {p.cta} <ArrowRight size={14} aria-hidden="true" />
-                  </button>
-                ) : (
-                  <Link
-                    href={p.href}
-                    className="inline-flex items-center gap-1.5 text-dalton-cyan text-sm font-semibold hover:gap-2.5 transition-all duration-150 focus-visible:outline-none focus-visible:underline"
-                  >
-                    {p.cta} <ArrowRight size={14} aria-hidden="true" />
-                  </Link>
-                )}
+              <div className="flex items-center mt-auto pt-2">
+                <span className="inline-flex items-center gap-1.5 text-dalton-cyan text-sm font-semibold">
+                  {p.cta} <ArrowRight size={14} aria-hidden="true" />
+                </span>
               </div>
             </article>
+          )
+
+          return (
+            <div
+              key={p.href}
+              className="flex-shrink-0 w-[78vw] snap-start md:w-auto md:flex-shrink md:snap-align-none"
+            >
+              {isPopupVariant ? (
+                <button
+                  onClick={() => setOpenProduct(productKey)}
+                  className="w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dalton-cyan rounded-2xl h-full"
+                  aria-label={`${p.cta} — ${p.name}`}
+                >
+                  {cardContent}
+                </button>
+              ) : (
+                <Link
+                  href={p.href}
+                  className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dalton-cyan rounded-2xl h-full"
+                  aria-label={`${p.cta} — ${p.name}`}
+                >
+                  {cardContent}
+                </Link>
+              )}
+            </div>
           )
         })}
       </div>
@@ -116,12 +127,14 @@ export function HubClientLayer({ products }: { products: ComingSoonProduct[] }) 
   return (
     <Suspense
       fallback={
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="flex gap-4 overflow-x-auto -mx-6 px-6 pb-2 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-3 md:overflow-visible">
           {products.map(p => (
-            <article key={p.href} className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col gap-3">
-              <h3 className="text-base font-black text-white">{p.name}</h3>
-              <p className="text-slate-200 text-sm leading-relaxed">{p.tagline}</p>
-            </article>
+            <div key={p.href} className="flex-shrink-0 w-[78vw] md:w-auto md:flex-shrink">
+              <article className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col gap-3 h-full">
+                <h3 className="text-base font-black text-white">{p.name}</h3>
+                <p className="text-slate-200 text-sm leading-relaxed">{p.tagline}</p>
+              </article>
+            </div>
           ))}
         </div>
       }
