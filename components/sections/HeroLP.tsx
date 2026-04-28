@@ -11,7 +11,7 @@ interface HeroLPProps {
   onCTA: () => void
 }
 
-export function HeroLP({ badge, headline, subheadline, price = 'R$ 297/mês · Sem setup · Cancele quando quiser', ctaLabel = 'Garantir meu lugar →', onCTA }: HeroLPProps) {
+export function HeroLP({ badge, headline, subheadline, price, ctaLabel = 'Garantir meu lugar →', onCTA }: HeroLPProps) {
   return (
     <section className="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-6 py-24 overflow-hidden">
       {/* Glow de fundo */}
@@ -32,7 +32,7 @@ export function HeroLP({ badge, headline, subheadline, price = 'R$ 297/mês · S
           {ctaLabel}
         </Button>
 
-        <p className="text-sm text-dalton-gray-mid">{price}</p>
+        {price && <p className="text-sm text-dalton-gray-mid">{price}</p>}
       </div>
     </section>
   )

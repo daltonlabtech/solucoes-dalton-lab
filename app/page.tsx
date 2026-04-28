@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Check } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { HubClientLayer } from '@/components/HubClientLayer'
 
 export const metadata: Metadata = {
   title: 'Dalton Lab — Ferramentas de IA para PME',
@@ -35,7 +36,7 @@ const comingSoonProducts = [
     name: 'SDR WhatsApp',
     tagline: 'Seu WhatsApp atende, classifica e responde seus leads — mesmo quando você não está.',
     painStat: 'Lead sem resposta em 5 min tem 10× menos chance de fechar.',
-    price: 'R$ 297/mês no lançamento',
+
     cta: 'Garantir meu lugar',
   },
   {
@@ -43,7 +44,7 @@ const comingSoonProducts = [
     name: 'Gerador de Propostas',
     tagline: 'Do CRM para a proposta pronta em menos de 1 minuto — sem abrir o PowerPoint.',
     painStat: '41h por mês perdidas em proposta manual — por vendedor.',
-    price: 'R$ 297/mês no lançamento',
+
     cta: 'Garantir meu lugar',
   },
   {
@@ -51,7 +52,7 @@ const comingSoonProducts = [
     name: 'Transcrição + CRM',
     tagline: 'Cada reunião vira resumo e tarefa no CRM automaticamente — sem você digitar nada.',
     painStat: '100% das notas de reunião criadas sem integração ao CRM.',
-    price: 'R$ 297/mês no lançamento',
+
     cta: 'Garantir meu lugar',
   },
 ]
@@ -115,37 +116,7 @@ export default function HubPage() {
           ))}
 
           {/* Acesso antecipado */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {comingSoonProducts.map(p => (
-              <article
-                key={p.href}
-                className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col gap-3 hover:border-dalton-cyan/30 transition-all duration-200"
-              >
-                <div className="flex items-center justify-between gap-2">
-                  <h3 className="text-base font-black text-white">{p.name}</h3>
-                  <span className="text-xs font-bold uppercase tracking-widest text-dalton-cyan bg-dalton-cyan/10 border border-dalton-cyan/25 px-2.5 py-1 rounded-full whitespace-nowrap">
-                    Acesso antecipado
-                  </span>
-                </div>
-
-                <p className="text-slate-200 text-sm leading-relaxed">{p.tagline}</p>
-
-                <p className="text-xs text-slate-300 italic border-l-2 border-dalton-cyan/40 pl-3 leading-relaxed">
-                  {p.painStat}
-                </p>
-
-                <div className="flex items-center justify-between mt-auto pt-2">
-                  <p className="text-slate-300 text-xs">{p.price}</p>
-                  <Link
-                    href={p.href}
-                    className="inline-flex items-center gap-1.5 text-dalton-cyan text-sm font-semibold hover:gap-2.5 transition-all duration-150 focus-visible:outline-none focus-visible:underline"
-                  >
-                    {p.cta} <ArrowRight size={14} aria-hidden="true" />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
+          <HubClientLayer products={comingSoonProducts} />
         </div>
       </section>
 

@@ -40,7 +40,6 @@ const faqItems = [
 ]
 
 const pricingRows = [
-  { label: 'Preço de lançamento', value: 'R$ 297/mês' },
   { label: 'Contrato', value: 'Mensal, sem fidelidade' },
   { label: 'Setup', value: 'Você sobe o template uma vez' },
   { label: 'Suporte no lançamento', value: 'Direto com o time' },

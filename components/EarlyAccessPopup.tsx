@@ -6,16 +6,16 @@ import { posthog } from '@/lib/posthog'
 import { formatWhatsApp } from '@/lib/formatWhatsApp'
 import { whatsappInputClass } from '@/lib/utils'
 
-interface WaitlistModalProps {
+interface EarlyAccessPopupProps {
   isOpen: boolean
   onClose: () => void
   product: string
   productLabel: string
-  modalTitle?: string
-  ctaLabel?: string
+  headline: string
+  body: string
 }
 
-export function WaitlistModal({ isOpen, onClose, product, productLabel, modalTitle = 'Garantir meu lugar', ctaLabel = 'Garantir meu lugar →' }: WaitlistModalProps) {
+export function EarlyAccessPopup({ isOpen, onClose, product, productLabel, headline, body }: EarlyAccessPopupProps) {
   const [whatsapp, setWhatsapp] = useState('')
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -28,7 +28,7 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, modalTit
       document.body.style.overflow = 'hidden'
       posthog.capture('waitlist_modal_opened', {
         product,
-        variant: 'control',
+        variant: 'popup',
         source_page: window.location.pathname,
       })
     } else {
@@ -47,7 +47,7 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, modalTit
     if (!success) {
       posthog.capture('waitlist_modal_abandoned', {
         product,
-        variant: 'control',
+        variant: 'popup',
         source_page: window.location.pathname,
       })
     }
@@ -62,19 +62,16 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, modalTit
     if (digits.length < 10) { setError('Informe um WhatsApp válido.'); return }
     setLoading(true)
     setError('')
-
     try {
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ whatsapp, product, variant: 'control' }),
+        body: JSON.stringify({ whatsapp, product, variant: 'popup' }),
       })
-
-      if (!res.ok) throw new Error('Erro ao enviar')
-
+      if (!res.ok) throw new Error()
       posthog.capture('waitlist_signup', {
         product,
-        variant: 'control',
+        variant: 'popup',
         source_page: window.location.pathname,
       })
       setSuccess(true)
@@ -89,7 +86,7 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, modalTit
     <div
       role="dialog"
       aria-modal="true"
-      aria-labelledby="modal-title"
+      aria-labelledby="popup-title"
       className="fixed inset-0 z-[100] flex items-center justify-center p-4"
     >
       <div
@@ -97,7 +94,6 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, modalTit
         onClick={handleClose}
         aria-hidden="true"
       />
-
       <div className="relative w-full max-w-sm glass-card p-8 shadow-2xl border border-dalton-cyan/20">
         <button
           onClick={handleClose}
@@ -114,22 +110,24 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, modalTit
             <p className="text-dalton-gray-light text-sm">
               Você está entre os primeiros a testar o <strong className="text-white">{productLabel}</strong>. A gente entra em contato antes do lançamento público.
             </p>
-            <button onClick={onClose} className="mt-5 text-dalton-cyan text-sm underline">Fechar</button>
+            <button onClick={onClose} className="mt-5 text-dalton-cyan text-sm underline">
+              Fechar
+            </button>
           </div>
         ) : (
           <>
-            <h2 id="modal-title" className="text-xl font-black text-white mb-6">
-              {modalTitle}
+            <h2 id="popup-title" className="text-xl font-black text-white mb-2">
+              {headline}
             </h2>
-
+            <p className="text-dalton-gray-light text-sm mb-6">{body}</p>
             <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
               <div>
-                <label htmlFor="modal-whatsapp" className="text-sm text-dalton-gray-light mb-1 block">
+                <label htmlFor="popup-whatsapp" className="text-sm text-dalton-gray-light mb-1 block">
                   Qual o seu WhatsApp?
                 </label>
                 <input
                   ref={inputRef}
-                  id="modal-whatsapp"
+                  id="popup-whatsapp"
                   type="tel"
                   required
                   autoComplete="tel"
@@ -140,13 +138,10 @@ export function WaitlistModal({ isOpen, onClose, product, productLabel, modalTit
                   placeholder="(11) 99999-9999"
                 />
               </div>
-
               {error && <p role="alert" className="text-red-400 text-sm">{error}</p>}
-
               <Button type="submit" loading={loading} size="lg" className="w-full">
-                {ctaLabel}
+                Quero acesso antecipado →
               </Button>
-
               <p className="text-xs text-dalton-gray-mid text-center">
                 Sem spam. A gente só avisa no lançamento.
               </p>

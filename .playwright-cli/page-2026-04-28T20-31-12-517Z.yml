@@ -1,0 +1,25 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - heading "Liberdade FM" [level=1] [ref=e6]
+      - paragraph [ref=e7]: Entre para participar das promoções
+    - generic [ref=e8]:
+      - generic [ref=e9]:
+        - generic [ref=e10]: CPF
+        - textbox "CPF" [ref=e11]:
+          - /placeholder: 999.999.999-99
+      - generic [ref=e12]:
+        - generic [ref=e13]: Senha
+        - textbox "Senha" [ref=e14]:
+          - /placeholder: ••••••••
+      - link "Esqueci minha senha" [ref=e15] [cursor=pointer]:
+        - /url: /esqueci-minha-senha
+      - button "Entrar" [ref=e16] [cursor=pointer]
+      - paragraph [ref=e17]:
+        - text: Não tem conta?
+        - link "Cadastre-se" [ref=e18] [cursor=pointer]:
+          - /url: /cadastro
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e24] [cursor=pointer]:
+    - img [ref=e25]
+  - alert [ref=e28]

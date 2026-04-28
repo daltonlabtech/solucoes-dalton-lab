@@ -1,5 +1,6 @@
-// lib/posthog.ts
 import posthog from 'posthog-js'
+
+export const AB_WAITLIST_FLAG = 'ab_waitlist_popup_v1'
 
 export function initPostHog() {
   if (typeof window === 'undefined') return

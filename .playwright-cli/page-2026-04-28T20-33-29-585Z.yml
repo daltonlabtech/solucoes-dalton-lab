@@ -1,0 +1,157 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation "Navegação principal" [ref=e3]:
+      - link "Dalton Lab" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "Dalton Lab" [ref=e5]
+      - list [ref=e6]:
+        - listitem [ref=e7]:
+          - link "SDR WhatsApp" [ref=e8] [cursor=pointer]:
+            - /url: /sdr
+        - listitem [ref=e9]:
+          - link "Gerador de Propostas" [ref=e10] [cursor=pointer]:
+            - /url: /propostas
+        - listitem [ref=e11]:
+          - link "Reuniões → CRM" [ref=e12] [cursor=pointer]:
+            - /url: /crm
+        - listitem [ref=e13]:
+          - link "Radar" [ref=e14] [cursor=pointer]:
+            - /url: /radar
+        - listitem [ref=e15]:
+          - link "Linkedin Post" [ref=e16] [cursor=pointer]:
+            - /url: /linkedin
+      - link "Ver soluções" [ref=e17] [cursor=pointer]:
+        - /url: /
+        - button "Ver soluções" [ref=e18]
+  - main [ref=e19]:
+    - generic [ref=e20]:
+      - generic [ref=e22]:
+        - generic [ref=e23]: SDR WhatsApp
+        - heading "Seu WhatsApp atende — mesmo quando você não está." [level=1] [ref=e24]
+        - paragraph [ref=e25]: Lead que espera mais de 5 minutos tem 10x menos chance de comprar. O SDR WhatsApp responde, classifica e qualifica — e só chama você quando o cliente está pronto.
+        - button "Testar com meu WhatsApp →" [ref=e26] [cursor=pointer]
+        - paragraph [ref=e27]: R$ 297/mês · Sem setup · Cancele quando quiser
+      - generic [ref=e29]:
+        - heading "Você está perdendo venda toda hora — e nem sabe." [level=2] [ref=e31]
+        - generic [ref=e32]:
+          - paragraph [ref=e33]: Leads chegam de manhã cedo, no almoço, depois das 18h. Sua equipe não consegue responder tudo. O cliente manda mensagem, não recebe resposta em 5 minutos — e compra do concorrente.
+          - paragraph [ref=e34]: Não é falta de vendedor. É falta de um primeiro atendimento que funcione no tempo certo.
+        - generic [ref=e35]:
+          - generic [ref=e36]:
+            - paragraph [ref=e37]: 200+
+            - paragraph [ref=e38]: "leads/dia sem resposta em pico (caso real: setor odontológico)"
+          - generic [ref=e39]:
+            - paragraph [ref=e40]: 100%
+            - paragraph [ref=e41]: das PMEs de varejo e distribuição usam WhatsApp como canal principal de vendas
+          - generic [ref=e42]:
+            - paragraph [ref=e43]: "0"
+            - paragraph [ref=e44]: delas tinha automação no primeiro atendimento
+      - generic [ref=e46]:
+        - heading "Um SDR que nunca dorme, nunca esquece, nunca perde contexto." [level=2] [ref=e47]
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e51]: "1"
+            - generic [ref=e52]:
+              - heading "Atende na hora" [level=3] [ref=e53]
+              - paragraph [ref=e54]: Responde o lead em segundos, com a linguagem da sua empresa, 24h por dia.
+          - generic [ref=e55]:
+            - generic [ref=e57]: "2"
+            - generic [ref=e58]:
+              - heading "Classifica e qualifica" [level=3] [ref=e59]
+              - paragraph [ref=e60]: Entende o que o cliente precisa, busca no catálogo se for varejo, coleta as informações que o vendedor precisaria pedir.
+          - generic [ref=e61]:
+            - generic [ref=e63]: "3"
+            - generic [ref=e64]:
+              - heading "Passa para o humano com contexto" [level=3] [ref=e65]
+              - paragraph [ref=e66]: Quando o lead está pronto, o vendedor recebe um resumo completo e entra na conversa sem começar do zero.
+        - paragraph [ref=e68]: Não é um bot genérico. É um SDR treinado no seu negócio.
+      - generic [ref=e70]:
+        - generic [ref=e72]:
+          - heading "Funciona enquanto você dorme." [level=2] [ref=e73]
+          - paragraph [ref=e74]: Às 22h47, um lead chegou. Nenhum vendedor estava online. O SDR respondeu em menos de 1 segundo.
+        - generic [ref=e75]:
+          - generic [ref=e76]:
+            - generic [ref=e77]:
+              - generic [ref=e79]: SD
+              - generic [ref=e80]:
+                - paragraph [ref=e81]: SDR WhatsApp
+                - paragraph [ref=e82]: online agora
+            - generic [ref=e83]:
+              - generic [ref=e85]: Hoje, 22:47
+              - generic [ref=e87]:
+                - paragraph [ref=e88]: Oi, vocês ainda têm vaga essa semana?
+                - paragraph [ref=e89]: 22:47
+              - generic [ref=e91]:
+                - paragraph [ref=e92]: Oi! Temos sim 👋 Qual serviço você tem interesse?
+                - paragraph [ref=e93]: 22:47 ✓✓
+              - generic [ref=e95]:
+                - paragraph [ref=e96]: Queria o pacote mensal. Quanto fica?
+                - paragraph [ref=e97]: 22:48
+              - generic [ref=e99]:
+                - paragraph [ref=e100]: O pacote mensal inclui tudo que você precisa pra começar. Vou chamar a Ana — ela confirma os detalhes e os horários disponíveis.
+                - paragraph [ref=e101]: 22:48 ✓✓
+              - generic [ref=e102]:
+                - paragraph [ref=e103]: 🔔 Ana recebeu o lead
+                - paragraph [ref=e104]: Quer pacote mensal, perguntou sobre preço. Pronto para agendar.
+          - generic [ref=e105]:
+            - generic [ref=e106]:
+              - paragraph [ref=e107]: < 1 seg
+              - paragraph [ref=e108]: Tempo mediano de resposta do SDR
+            - generic [ref=e109]:
+              - paragraph [ref=e110]: 23,6%
+              - paragraph [ref=e111]: Das conversas acontecem fora do horário comercial
+            - generic [ref=e112]:
+              - paragraph [ref=e113]: "693"
+              - paragraph [ref=e114]: Conversas atendidas em 2,5 meses — sem um vendedor envolvido
+            - paragraph [ref=e115]:
+              - text: Dados reais coletados em produção.
+              - text: Consultoria financeira para brasileiros no exterior — jan–abr 2026.
+      - generic [ref=e117]:
+        - heading "Seja um dos primeiros a testar." [level=2] [ref=e118]
+        - paragraph [ref=e119]: Estamos abrindo vagas para os primeiros clientes — com acompanhamento direto do time da Dalton Lab.
+        - table [ref=e121]:
+          - rowgroup [ref=e122]:
+            - row "Contrato Mensal, sem fidelidade" [ref=e123]:
+              - cell "Contrato" [ref=e124]
+              - cell "Mensal, sem fidelidade" [ref=e125]
+            - row "Setup Zero — onboarding em horas" [ref=e126]:
+              - cell "Setup" [ref=e127]
+              - cell "Zero — onboarding em horas" [ref=e128]
+            - row "Suporte no lançamento Direto com o time" [ref=e129]:
+              - cell "Suporte no lançamento" [ref=e130]
+              - cell "Direto com o time" [ref=e131]
+        - generic [ref=e132]:
+          - button "Quero uma das primeiras vagas →" [ref=e133] [cursor=pointer]
+          - generic [ref=e134]:
+            - img [ref=e135]
+            - text: Sem contrato anual. Cancele quando quiser.
+      - generic [ref=e138]:
+        - heading "Perguntas frequentes" [level=2] [ref=e139]
+        - generic [ref=e140]:
+          - button "Vai parecer robô para o meu cliente?" [ref=e142]:
+            - generic [ref=e143]: Vai parecer robô para o meu cliente?
+            - img [ref=e144]
+          - button "Funciona com qualquer número de WhatsApp?" [ref=e147]:
+            - generic [ref=e148]: Funciona com qualquer número de WhatsApp?
+            - img [ref=e149]
+          - button "E se o cliente quiser falar com uma pessoa?" [ref=e152]:
+            - generic [ref=e153]: E se o cliente quiser falar com uma pessoa?
+            - img [ref=e154]
+          - button "Quanto tempo leva para colocar no ar?" [ref=e157]:
+            - generic [ref=e158]: Quanto tempo leva para colocar no ar?
+            - img [ref=e159]
+          - button "E se eu quiser cancelar?" [ref=e162]:
+            - generic [ref=e163]: E se eu quiser cancelar?
+            - img [ref=e164]
+  - contentinfo [ref=e166]:
+    - generic [ref=e167]:
+      - img "Dalton Lab" [ref=e168]
+      - paragraph [ref=e169]: © 2026 Dalton Lab. Todos os direitos reservados.
+      - generic [ref=e170]:
+        - link "Soluções" [ref=e171] [cursor=pointer]:
+          - /url: /
+        - link "Contato" [ref=e172] [cursor=pointer]:
+          - /url: mailto:contato@daltonlab.ai
+  - button "Open Next.js Dev Tools" [ref=e178] [cursor=pointer]:
+    - img [ref=e179]
+  - alert [ref=e182]

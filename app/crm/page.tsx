@@ -36,7 +36,6 @@ const faqItems = [
 ]
 
 const pricingRows = [
-  { label: 'Preço de lançamento', value: 'R$ 297/mês' },
   { label: 'Contrato', value: 'Mensal, sem fidelidade' },
   { label: 'Setup', value: 'Zero — funciona no Meet e Teams sem instalar nada' },
   { label: 'Suporte no lançamento', value: 'Direto com o time' },
