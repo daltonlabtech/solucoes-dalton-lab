@@ -15,7 +15,7 @@ const availableProducts = [
     name: 'Radar',
     tagline: 'Veja exatamente o que funciona no seu Instagram — e pare de postar no escuro.',
     metric: '3M+ visualizações rastreadas',
-    price: 'R$ 297/mês',
+    price: 'R$ 97/mês',
     cta: 'Assinar agora',
     badge: true,
   },
