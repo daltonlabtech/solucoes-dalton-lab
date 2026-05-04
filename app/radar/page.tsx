@@ -48,7 +48,7 @@ export default function RadarPage() {
           className="inline-flex items-center gap-2 bg-[#2563EB] text-white font-semibold px-8 py-4 rounded-xl hover:bg-[#1D4ED8] transition-colors text-base"
         >
           Assinar agora
-          <span className="text-white/60 font-normal">— R$297/mês</span>
+          <span className="text-white/60 font-normal">— R$97/mês</span>
         </a>
       </section>
     </div>

@@ -46,7 +46,7 @@ export default function LandingPricing({ checkoutUrl }: Props) {
                 style={{ fontFamily: 'var(--font-display)' }}
                 className="text-6xl text-white leading-none"
               >
-                R$297
+                R$97
               </p>
               <p className="text-white/30 text-sm mb-2">/mês</p>
             </div>
