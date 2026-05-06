@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 
 const CHECKOUT_URL =
   process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK_LINKEDIN ??
-  process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK ??
   'https://buy.stripe.com/eVq3cv6HsfTl2nJbcZfYY0B'
 
 export default function LinkedInPage() {
