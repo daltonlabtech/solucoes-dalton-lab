@@ -1,7 +1,9 @@
 'use client';
 
+import { trackCtaClick } from '@/lib/posthog';
+
 interface Props {
-  onCTA: () => void;
+  checkoutUrl: string;
 }
 
 const trustBadges = [
@@ -10,7 +12,7 @@ const trustBadges = [
   { value: '1 clique', label: 'publicação no LinkedIn' },
 ];
 
-export default function LandingHero({ onCTA }: Props) {
+export default function LandingHero({ checkoutUrl }: Props) {
   return (
     <section style={{ background: '#0C0C0E' }} className="relative overflow-hidden">
       <div
@@ -38,12 +40,14 @@ export default function LandingHero({ onCTA }: Props) {
         </p>
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-10">
-          <button
-            onClick={onCTA}
+          <a
+            href={checkoutUrl}
+            onClick={(e) => { e.preventDefault(); trackCtaClick(checkoutUrl, 'hero', 'linkedin'); }}
             className="inline-flex items-center gap-2 bg-[#2563EB] text-white font-semibold px-7 py-3.5 rounded-lg hover:bg-[#1D4ED8] transition-colors text-base"
           >
-            Quero acesso antecipado
-          </button>
+            Comprar Agora
+            <span className="text-white/60 font-normal">— R$99/mês</span>
+          </a>
           <span className="text-white/55 text-sm">100 posts por mês · Cancele quando quiser</span>
         </div>
 
