@@ -25,7 +25,7 @@ const availableProducts = [
     tagline: 'Crie posts alinhados à voz da sua empresa e publique direto no LinkedIn com um clique.',
     metric: '100 posts por mês · 2 min do briefing ao post',
     price: 'R$ 99/mês',
-    cta: 'Quero acesso antecipado',
+    cta: 'Comprar Agora',
     badge: false,
   },
 ]

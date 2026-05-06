@@ -1,7 +1,9 @@
 'use client';
 
+import { trackCtaClick } from '@/lib/posthog';
+
 interface Props {
-  onCTA: () => void;
+  checkoutUrl: string;
 }
 
 const includes = [
@@ -11,7 +13,7 @@ const includes = [
   'IA treinada com a identidade da sua marca',
 ];
 
-export default function LandingPricing({ onCTA }: Props) {
+export default function LandingPricing({ checkoutUrl }: Props) {
   return (
     <section style={{ background: '#0C0C0E' }} className="py-24 px-6">
       <div className="max-w-5xl mx-auto">
@@ -62,12 +64,13 @@ export default function LandingPricing({ onCTA }: Props) {
               ))}
             </ul>
 
-            <button
-              onClick={onCTA}
+            <a
+              href={checkoutUrl}
+              onClick={(e) => { e.preventDefault(); trackCtaClick(checkoutUrl, 'pricing', 'linkedin'); }}
               className="flex items-center justify-center gap-2 w-full bg-[#2563EB] text-white font-semibold py-4 rounded-xl hover:bg-[#1D4ED8] transition-colors text-base"
             >
-              Quero acesso antecipado
-            </button>
+              Comprar Agora
+            </a>
             <p className="text-white/20 text-xs text-center mt-4">Sem contrato. Cancele quando quiser.</p>
           </div>
         </div>

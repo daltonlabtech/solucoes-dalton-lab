@@ -1,25 +1,27 @@
-'use client'
-import { useState } from 'react'
+import type { Metadata } from 'next'
 import LandingHero from '@/components/landing/linkedin/LandingHero'
 import LandingVideoDemo from '@/components/landing/linkedin/LandingVideoDemo'
 import LandingBenefits from '@/components/landing/linkedin/LandingBenefits'
 import LandingPricing from '@/components/landing/linkedin/LandingPricing'
 import LandingFAQ from '@/components/landing/linkedin/LandingFAQ'
-import { WaitlistModal } from '@/components/WaitlistModal'
-import { Button } from '@/components/ui/Button'
 
-const PRODUCT = 'linkedin'
-const PRODUCT_LABEL = 'Linkedin Post'
+export const metadata: Metadata = {
+  title: 'Gerador de Posts LinkedIn — Dalton Lab',
+  description: 'Crie posts alinhados à voz da sua empresa e publique direto no LinkedIn. 100 posts por mês, com IA treinada na sua marca.',
+}
+
+const CHECKOUT_URL =
+  process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK_LINKEDIN ??
+  process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK ??
+  'https://buy.stripe.com/eVq3cv6HsfTl2nJbcZfYY0B'
 
 export default function LinkedInPage() {
-  const [modalOpen, setModalOpen] = useState(false)
-
   return (
     <div>
-      <LandingHero onCTA={() => setModalOpen(true)} />
+      <LandingHero checkoutUrl={CHECKOUT_URL} />
       <LandingVideoDemo />
       <LandingBenefits />
-      <LandingPricing onCTA={() => setModalOpen(true)} />
+      <LandingPricing checkoutUrl={CHECKOUT_URL} />
       <LandingFAQ />
 
       <section style={{ background: '#0C0C0E' }} className="py-24 px-6 text-center">
@@ -42,27 +44,14 @@ export default function LinkedInPage() {
         <p className="text-white/60 mb-10 max-w-md mx-auto text-base leading-relaxed">
           Primeiro post em minutos. Cancele quando quiser.
         </p>
-        <button
-          onClick={() => setModalOpen(true)}
+        <a
+          href={CHECKOUT_URL}
           className="inline-flex items-center gap-2 bg-[#2563EB] text-white font-semibold px-8 py-4 rounded-xl hover:bg-[#1D4ED8] transition-colors text-base"
         >
-          Quero acesso antecipado
-        </button>
+          Comprar Agora
+          <span className="text-white/60 font-normal">— R$99/mês</span>
+        </a>
       </section>
-
-      {/* CTA fixo mobile */}
-      <div className="fixed bottom-0 left-0 right-0 md:hidden p-4 bg-dalton-bg/90 backdrop-blur border-t border-white/5 z-40">
-        <Button size="lg" onClick={() => setModalOpen(true)} className="w-full">
-          Quero acesso antecipado →
-        </Button>
-      </div>
-
-      <WaitlistModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        product={PRODUCT}
-        productLabel={PRODUCT_LABEL}
-      />
     </div>
   )
 }
