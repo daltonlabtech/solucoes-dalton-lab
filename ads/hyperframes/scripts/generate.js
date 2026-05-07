@@ -257,7 +257,7 @@ for (const config of configs) {
     for (const style of STYLES) {
       const filename = `${config.id}-${style}-${durationKey}.html`
       const src = readFileSync(join(ROOT, 'compositions', filename), 'utf8')
-      const out = src.replaceAll('src="../src/assets/logo.png"', 'src="/logo.png"')
+      const out = src.replaceAll('src="src/assets/logo.png"', 'src="/logo.png"')
       if (out === src) throw new Error(`${filename}: logo path replacement not found`)
       writeFileSync(join(PUBLIC_COMPS, filename), out, 'utf8')
     }
