@@ -231,40 +231,41 @@
     data-composition-id="{{compositionId}}"
     data-width="1080"
     data-height="1920"
+    data-start="0"
     data-duration="{{durationSeconds}}">
 
     <div class="glow" id="glow-main"></div>
 
-    <img id="logo"
+    <img id="logo" class="clip"
       data-start="0" data-duration="{{durationSeconds}}" data-track-index="1"
-      src="../src/assets/logo.png" alt="Dalton Lab" />
+      src="src/assets/logo.png" alt="Dalton Lab" />
 
     <div id="content">
-      <span id="eyebrow"
+      <span id="eyebrow" class="clip"
         data-start="0" data-duration="{{durationSeconds}}" data-track-index="2">{{eyebrow}}</span>
 
-      <h1 id="headline"
+      <h1 id="headline" class="clip"
         data-start="0" data-duration="{{durationSeconds}}" data-track-index="3">{{headlineHtml}}</h1>
 
-      <div id="divider"
+      <div id="divider" class="clip"
         data-start="0" data-duration="{{durationSeconds}}" data-track-index="4"></div>
 
       <!-- IF:pills -->
-      <div id="pills"
+      <div id="pills" class="clip"
         data-start="0" data-duration="{{durationSeconds}}" data-track-index="5">
         {{pillsHtml}}
       </div>
       <!-- ENDIF:pills -->
 
-      <p id="subline"
+      <p id="subline" class="clip"
         data-start="0" data-duration="{{durationSeconds}}" data-track-index="6">{{sublineHtml}}</p>
 
-      <a id="cta"
+      <a id="cta" class="clip"
         data-start="0" data-duration="{{durationSeconds}}" data-track-index="7">{{cta}}</a>
     </div>
 
     <!-- IF:grid -->
-    <div id="grid"
+    <div id="grid" class="clip"
       data-start="0" data-duration="{{durationSeconds}}" data-track-index="8">
       <div class="grid-card radar">
         <span class="card-name">Radar</span>

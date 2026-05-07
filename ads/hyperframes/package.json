@@ -7,5 +7,8 @@
     "preview": "npx hyperframes preview",
     "render:all": "node scripts/render-all.js",
     "test": "node --test tests/generate.test.js"
+  },
+  "devDependencies": {
+    "hyperframes": "^0.5.3"
   }
 }

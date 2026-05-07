@@ -1,8 +1,12 @@
 (function () {
   const t = window.TIMING;
-  const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+  const totalDuration = t.duration;
+  const tl = gsap.timeline({ defaults: { ease: 'power2.out' }, paused: true });
   const el = (id) => document.getElementById(id);
   const has = (id) => !!el(id);
+  const compId = document.querySelector('[data-composition-id]').getAttribute('data-composition-id');
+  window.__timelines = window.__timelines || {};
+  window.__timelines[compId] = tl;
 
   tl.fromTo(el('logo'),
     { autoAlpha: 0, y: -28 },
@@ -56,11 +60,14 @@
     t.cta.start
   );
 
+  const ctaPulseStart = t.cta.start + 0.7;
+  const ctaPulseCycle = 0.9;
+  const ctaPulseRepeat = Math.max(0, Math.floor((totalDuration - ctaPulseStart) / ctaPulseCycle) - 1);
   tl.to(el('cta'), {
     scale: 1.04,
-    duration: 0.9,
-    repeat: -1,
+    duration: ctaPulseCycle,
+    repeat: ctaPulseRepeat,
     yoyo: true,
     ease: 'sine.inOut',
-  }, t.cta.start + 0.7);
+  }, ctaPulseStart);
 }());
